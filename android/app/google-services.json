@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "357033720656",
+    "project_id": "braided-tracker-343119",
+    "storage_bucket": "braided-tracker-343119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357033720656:android:a0d59e7f7b1d392d04ca55",
+        "android_client_info": {
+          "package_name": "com.example.rescue2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "357033720656-7d6v0uat9beaj9m41n6rrl2c9a5ssrg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoYYsJqTV_lorOA2OdPhPYWt_X4LHrfgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "357033720656-7d6v0uat9beaj9m41n6rrl2c9a5ssrg1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

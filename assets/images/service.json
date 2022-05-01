@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rare-gate-340514",
+  "private_key_id": "e842dbe7a4d8b4759c36eb5b08e63be4ef335c01",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDDooCPxIDkqC1Y\nmBPC/myeIa68ELzFio3R6ZtBX624q9y8a8hpKspF22XvwdM7fmQtdnepN+wfa/V2\ne0nut7tpBguN7WgM3QOdUc1Ujqf2jngtyRGHX2NCij/rjiyIQLf5zm2W+/yE2waB\n/SUSBtThQE7NQnlXKY28LowB+ZFX2d9v9mwEwH3kNktdq+r+FuOtUGb3hgIsmfdt\nWbEyAZuocnJeJDMC+uh5AfAklDpAif6KDDtkvsHXGJReo9f2ADxWx1VUPQassuKM\nCjGJiMHgYSbRrz+c2goJAD8K1+0LYnLaoTZtTX1zzsdpcFPx1FKsYk78Dwn4g8Wx\nb3dTDF+3AgMBAAECggEAH/SeTV2KtE7oQU1uBO7sLRRRZ3TQcPAF5GDlNFN9m+mu\nv7RXYx5TNf/1calWaKRnlqmAOErjLerDiJvw4qZuXWRYZNF/qoI7geoHwSUgOHzj\nEo+CZntlSkwszrxFd+giZRKcAgqdH9JrCLah5ITrJvQLKyoNifhGp5Nu2S+71v59\nZTTNPiqpRlp/UfTXRiYwq74YxMCGvFA7MYwFUfXDPZXQPuZ4OArYRv22OfEQV6Yr\n0gt/YlLRfqJEqyd0QqpZjWczc92SUL08cQNMXUnDMncOVTxuX7zhsKxhNfBe49zY\nAGF+o1xZYu/xaPFTfmdr/WywcThKwppsUQQ20i3dCQKBgQDu+q0/QnQppFwPSgTi\nXoluM7iuBJ0gpaUPMDs/BhKghiN/A9Ilh4YZr10YCIrCmUe9dzUokSbHCIqoNPFO\n63TBSdnPN6G542peSE7dAFFQVKrrc977MswnPAv9N5wv3E9gLJvPQdCR+QzlATYL\ne2HbIe7wWejisM0aYVuT4YR+WwKBgQDRkYYMnoZn4exqy0LBq6RZVGlvwGVp6bLY\nLH5YM49kRpvQfjLLTMAnP+xRbw9Fj22ZYg9PJF7adtfhp43depdut30hmW/8vQzM\nhuN/L0XUBLX/Yg1OJKxm6Zn7/QuOZwQO5V7LFhXO95Sz00X3csQyHzpKPKPk35A9\nwIJHlg4a1QKBgHJi6FP0MffQpQPocQgNKgjmlsosiS0cPDJV6rXS6U2OhyT/pjGy\nebyHlK6xQAG/LniAu6AMQhxYeU3j8XDOANeXyrqFrVJ1iO9R+vWLdmBV9m22y48/\nFDrfYfm1CXxbHl8xWu7MWNHV/JcMilrals81odHHp1ICQFoVKalR84IrAoGAIPfp\nxLZzoogSL0LGv70G3969r4zu51iSgBuPzMRfvIC3JneT+hOa7xHJVY5JMsI7lbOt\ngN/R5EBp+d/oG32bsRlAoDaJPZNoHgziYTHIpHARSZndSfvO+2mohdHrLX3bT5SZ\n8w0IZUThqeCE00bEwrXS77bWeb0J7g0I8cYTdfkCgYA8McU+XIsI9V5xSP1kuwRN\n++EfupyT5DUxWNs4gfGaIEno+Prn+V0NfvgS8yrPWgf4Jc8Ne72kLMlaVKA57DmO\n7GZWuvAtBf4eY6mHxHhqcw8iOizmjhYLZbKQzIv6xy5Re0/MQkV57qxf9ZztwYnU\n+FNTx354rtxFAcuDbZWGSQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "rescue-assistant@rare-gate-340514.iam.gserviceaccount.com",
+  "client_id": "109900080810050262996",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rescue-assistant%40rare-gate-340514.iam.gserviceaccount.com"
+}
