@@ -18,7 +18,7 @@ Future main() async {
 
         () {
       runApp(
-
+// entry point MaterialApp
           MaterialApp(
            title: 'rescue',
           theme: ThemeData(
