@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:rescue2/screens/Home.dart';
+import 'package:rescue2/screens/navigation_bar.dart';
 
 class Safety extends StatelessWidget {
   const Safety({Key? key}) : super(key: key);

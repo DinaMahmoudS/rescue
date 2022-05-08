@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/home.dart';
+import 'package:rescue2/screens/navigation_bar.dart';
 
 class Gps extends StatelessWidget {
   const Gps({Key? key}) : super(key: key);

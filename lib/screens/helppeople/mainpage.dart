@@ -5,7 +5,7 @@ import 'package:rescue2/screens/helppeople/getlocation_service.dart';
 import 'package:rescue2/screens/helppeople/request.dart';
 
 
-import '../Home.dart';
+import '../navigation_bar.dart';
 
 class Helppeople extends StatefulWidget {
   const Helppeople({Key? key}) : super(key: key);
