@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/user_signup/signup2.dart';
+import 'package:rescue2/screens/user_signup/signup.dart';
+
 
 
 class profile extends StatelessWidget {
@@ -227,7 +228,7 @@ class profile extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
-                                return Signup2();
+                                return Signup();
                               }));
                         },
                         child: const Text('Save',
