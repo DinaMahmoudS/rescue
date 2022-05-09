@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/Home.dart';
+import 'package:rescue2/screens/navigation_bar.dart';
 
 import '../Battery/Battery.dart';
 import '../Brakes/Brakes.dart';

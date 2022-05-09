@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rescue2/screens/Home.dart';
+import 'package:rescue2/screens/navigation_bar.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_signup/cubit.dart';
 import 'package:rescue2/screens/user_signup/states.dart';

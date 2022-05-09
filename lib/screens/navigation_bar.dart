@@ -6,7 +6,7 @@ import 'package:rescue2/screens/safety.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/home2.dart';
 import 'package:rescue2/screens/user_profile/profile_setting.dart';
-import 'gps_alert.dart';
+
 
 
 class Home extends StatefulWidget {

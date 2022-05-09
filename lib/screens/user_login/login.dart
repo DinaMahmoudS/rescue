@@ -1,12 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rescue2/screens/Home.dart';
+import 'package:rescue2/screens/navigation_bar.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/forgotpassword.dart';
 import 'package:rescue2/screens/user_login/cubit.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
-import 'package:app_settings/app_settings.dart';
 import 'states.dart';
 
 
@@ -47,7 +46,7 @@ class _LoginState extends State<Login> {
                     builder: (BuildContext context) {
                       return const Home();
                     }));
-                AppSettings.openLocationSettings();
+              //  AppSettings.openLocationSettings();
               }
 
             },
