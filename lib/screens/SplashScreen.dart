@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:rescue2/screens/home.dart';
 import 'intro_slider.dart';
 
-class SplashScreen extends StatefulWidget{
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -15,37 +14,22 @@ class SplashScreen extends StatefulWidget{
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-
     super.initState();
 
     // عشان الراجل يدخل
-    FirebaseAuth.instance
-        .authStateChanges()
-        .listen((User? user) {
-
-      Timer(const Duration(seconds: 3),
-              (){
-                if (user == null) {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder:
-                          (context) =>
-                          IntroSliderPage()
-                      )
-                  );
-                } else {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder:
-                          (context) =>
-                          Home()));
-                }
-
-          }
-      );
-
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      Timer(const Duration(seconds: 3), () {
+        if (user == null) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => IntroSliderPage()));
+        } else {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Home()));
+        }
+      });
     });
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-         color: Colors.white,
+          color: Colors.white,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,8 +50,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 150.0,
                   width: 150.0,
                 ),
-
-                const Text("Rescue",textAlign:TextAlign.center,
+                const Text(
+                  "Rescue",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -76,9 +61,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ],
             ),
-             const SizedBox(height: 60,),
+            const SizedBox(
+              height: 60,
+            ),
             const CircularProgressIndicator(
-              valueColor:  AlwaysStoppedAnimation<Color>(Colors.black),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
             ),
           ],
         ),
@@ -86,4 +73,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

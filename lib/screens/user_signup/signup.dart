@@ -49,7 +49,10 @@ class _SignupState extends State<Signup> {
            if (image == null) return;
 
            final imageTemporary = File(image.path);
-           setState(() => this.image = imageTemporary as TextEditingController);
+           setState(() {
+               this.image = imageTemporary as TextEditingController;
+               print(" hkkgkkbjbkbk  ${image.path }");
+               });
        } on PlatformException catch (e){
            print('falid to pick');
        }
