@@ -18,7 +18,7 @@ Future main() async {
 
         () {
       runApp(
-
+// entry point MaterialApp
           MaterialApp(
            title: 'rescue',
           theme: ThemeData(
@@ -27,6 +27,7 @@ Future main() async {
          // brightness: Brightness.dark,
            ),
            debugShowCheckedModeBanner: false,
+           // this SplashScreen
            home: SplashScreen(),
         //Guest(),
       ));
