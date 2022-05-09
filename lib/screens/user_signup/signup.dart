@@ -42,9 +42,6 @@ class _SignupState extends State<Signup> {
 
    File store_ref =
 
-
-
-
    bool _isObscure = true;
 
 

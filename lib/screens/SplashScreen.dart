@@ -18,9 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     super.initState();
 
-
-
-
     // عشان الراجل يدخل
     FirebaseAuth.instance
         .authStateChanges()
