@@ -40,20 +40,9 @@ class _SignupState extends State<Signup> {
 
    final formKey = GlobalKey<FormState>();
 
-   //File? image;
+   File store_ref =
 
-   Future pickImage() async{
-       try {
-           final image = await ImagePicker().pickImage(
-               source: ImageSource.gallery);
-           if (image == null) return;
 
-           final imageTemporary = File(image.path);
-           setState(() => this.image = imageTemporary as TextEditingController);
-       } on PlatformException catch (e){
-           print('falid to pick');
-       }
-   }
 
 
    bool _isObscure = true;
