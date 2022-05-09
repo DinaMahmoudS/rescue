@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_signup/signup2.dart';
-import 'package:rescue2/screens/user_signup/signup.dart';
+
+import '../user_signup/signup.dart';
+
+
 class profile extends StatelessWidget {
   const profile({Key? key}) : super(key: key);
 
@@ -11,7 +14,7 @@ class profile extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-// this is test
+// this is scaffold test
         appBar: AppBar(
           backgroundColor: Mycolor.darkblue,
           shape: const RoundedRectangleBorder(
@@ -248,17 +251,20 @@ class profile extends StatelessWidget {
                 ),
               ),
               onPressed: () {
+
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
                       return Signup();
                     }));
               },
-              child: const Text('log out',
+              child: const Text(''
+                  'log out',
                   style: TextStyle(
                     fontSize: 18,
                   ))),
         ],
       ),
+
 
               ],
             ),

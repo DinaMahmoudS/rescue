@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:rescue2/screens/navigation_bar.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_signup/cubit.dart';
 import 'package:rescue2/screens/user_signup/common_photo_register.dart';
 import 'package:rescue2/screens/user_signup/states.dart';
-
+import 'package:app_settings/app_settings.dart';
+import '../navigation_bar.dart';
 import '../user_login/login.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
 
 class Signup extends StatefulWidget {
    Signup({Key? key}) : super(key: key);
-
+//this is test 2
   @override
   State<Signup> createState() => _SignupState();
 }
@@ -40,7 +40,21 @@ class _SignupState extends State<Signup> {
 
    final formKey = GlobalKey<FormState>();
 
-   File store_ref =
+   //File? image;
+
+   Future pickImage() async{
+       try {
+           final image = await ImagePicker().pickImage(
+               source: ImageSource.gallery);
+           if (image == null) return;
+
+           final imageTemporary = File(image.path);
+           setState(() => this.image = imageTemporary as TextEditingController);
+       } on PlatformException catch (e){
+           print('falid to pick');
+       }
+   }
+
 
    bool _isObscure = true;
 
@@ -58,7 +72,7 @@ class _SignupState extends State<Signup> {
                     builder: (BuildContext context) {
                         return const Home();
                     }));
-               // AppSettings.openLocationSettings();
+                AppSettings.openLocationSettings();
             }
 
             if(state is UserSignupErrorState)
@@ -384,7 +398,7 @@ class _SignupState extends State<Signup> {
               image: image.text,
 
           );
-      }
+      } AppSettings.openLocationSettings();
       //  return Signup2();
 
       },
