@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue2/screens/home.dart';
 import 'intro_slider.dart';
 
 class SplashScreen extends StatefulWidget{
@@ -15,14 +17,28 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
 
     super.initState();
-    Timer(const Duration(seconds: 3),
-            ()=>Navigator.pushReplacement(context,
-            MaterialPageRoute(builder:
-                (context) =>
-                IntroSliderPage()
+    // عشان الراجل يدخل
+    FirebaseAuth.instance
+        .authStateChanges()
+        .listen((User? user) {
+      if (user == null) {
+        Timer(const Duration(seconds: 3),
+                ()=>Navigator.pushReplacement(context,
+                MaterialPageRoute(builder:
+                    (context) =>
+                    IntroSliderPage()
+                )
             )
-        )
-    );
+        );
+      } else {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder:
+        (context) =>
+        Home()));
+      }
+    });
+
+
   }
   @override
   Widget build(BuildContext context) {
