@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/Buttons%20Screens/Main%20Screen/Main%20Screen.dart';
@@ -14,6 +15,7 @@ class Brakes extends StatefulWidget {
 }
 
 class _BrakesState extends State<Brakes> {
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,15 +54,15 @@ class _BrakesState extends State<Brakes> {
             centerTitle: true,
 //Leading is used to put the items on the left side on the app bar but in this case the icon
             leading:
-                //This is the arrow icon
-                IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (BuildContext context) {
+            //This is the arrow icon
+            IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
                         return Main_Screen();
                       }));
-                    }),
+                }),
 //Action is used to put the items on the right side on the app bar but in this case the icon
             actions: [
 //Padding is used here to adjust the place of the icon below
@@ -81,27 +83,10 @@ class _BrakesState extends State<Brakes> {
                   padding: const EdgeInsets.only(right: 30, left: 30),
                   child: Container(
                     height: 70,
-                    child: const TextField(
+                    child: TextField( controller: controller,
                       decoration: InputDecoration(
                         hoverColor: Colors.white,
                         hintText: "Milage You Changed your brake calipers at",
-                        icon: Icon(
-                          Icons.speed_rounded,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      keyboardType: TextInputType.datetime,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 30),
-                  child: Container(
-                    height: 70,
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hoverColor: Colors.white,
-                        hintText: "Enter the current milage",
                         icon: Icon(
                           Icons.speed_rounded,
                           color: Colors.blue,
@@ -115,25 +100,35 @@ class _BrakesState extends State<Brakes> {
                   height: 20,
                 ),
                 Container(
-                  height: 60,
-                  width: 150,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Mycolor.red,
-                          fixedSize: Size(300, 70),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0))),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return Main_Screen();
-                        }));
-                      },
-                      child: Text("Done")),
+                    height: 60,
+                    width: 150,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Mycolor.red,
+                            fixedSize: Size(300, 70),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0))),
+                        onPressed: () {
+                          final brakes = controller.text;
+                          createBrakes(brakes: brakes);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return Main_Screen();
+                              }));
+                        },
+                        child: Text("Done"))
                 ),
               ]),
         ),
       ),
     );
+  }
+  Future createBrakes({required String brakes}) async {
+    final docBrakes = FirebaseFirestore.instance.collection('Brakes').doc('brakes');
+    final json = {
+      'Milage brakes changed at':brakes,
+      'Date':DateTime.now(),
+    };
+    await docBrakes.set(json);
   }
 }
