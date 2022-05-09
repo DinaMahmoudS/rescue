@@ -12,7 +12,7 @@ class profile extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-
+// this is scaffold test
         appBar: AppBar(
           backgroundColor: Mycolor.darkblue,
           shape: const RoundedRectangleBorder(
