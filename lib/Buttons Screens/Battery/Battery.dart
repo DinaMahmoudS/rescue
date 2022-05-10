@@ -7,7 +7,6 @@ import 'package:rescue2/Buttons%20Screens/Main%20Screen/Main%20Screen.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
 
-
 class Battery extends StatefulWidget {
   const Battery({Key? key}) : super(key: key);
 
@@ -17,6 +16,7 @@ class Battery extends StatefulWidget {
 
 class _BatteryState extends State<Battery> {
   final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,8 +32,7 @@ class _BatteryState extends State<Battery> {
             fit: BoxFit.cover,
           ),
         ),
-        child:
-        Scaffold(
+        child: Scaffold(
           backgroundColor: Mycolor.white,
           appBar: AppBar(
 //This is the color of the app bar's BackGround
@@ -56,15 +55,15 @@ class _BatteryState extends State<Battery> {
             centerTitle: true,
 //Leading is used to put the items on the left side on the app bar but in this case the icon
             leading:
-            //This is the arrow icon
-            IconButton(
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
+                //This is the arrow icon
+                IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
                         return Main_Screen();
                       }));
-                }),
+                    }),
 //Action is used to put the items on the right side on the app bar but in this case the icon
             actions: [
 //Padding is used here to adjust the place of the icon below
@@ -72,7 +71,7 @@ class _BatteryState extends State<Battery> {
                   padding: EdgeInsets.only(right: 80),
 //This the Maintenance icon put as an image but viewed as an icon in the application and put inside a container to resize it as i desire
                   child: Container(
-                    //This is to set the height of the container that contains the photo
+                      //This is to set the height of the container that contains the photo
                       height: 30,
                       //This is to set the width of the container that contains the photo
                       width: 30,
@@ -88,11 +87,12 @@ class _BatteryState extends State<Battery> {
                   padding: const EdgeInsets.only(right: 30, left: 30),
                   child: Container(
                     height: 70,
-                    child:  TextField( controller: controller ,
+                    child: TextField(
+                      controller: controller,
                       decoration: InputDecoration(
                         hoverColor: Colors.white,
                         hintText:
-                        "Enter the date You put the battery in the car",
+                            "Enter the date You put the battery in the car",
                         icon: Icon(
                           Icons.calendar_today_outlined,
                           color: Colors.blue,
@@ -115,19 +115,28 @@ class _BatteryState extends State<Battery> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-                          final battery = controller.text;
-                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Battery');
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return Main_Screen();
-                              }));
+                          String v = printText(
+                              UID: '${FirebaseAuth.instance.currentUser!.uid}',
+                              coll: 'Battery',
+                              doc: 'Battery');
+
+
+                          if (!v.contains("null")){
+                            var a = v.split(" ");
+                            showToast2(a[0]);
+                             showToast2(a[1]);
+                          }
+                          // final battery = controller.text;
+                          // createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Battery');
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (BuildContext context) {
+                          //       return Main_Screen();
+                          //     }));
                         },
-                        child: Text("Done"))
-                ),
+                        child: Text("Done"))),
               ]),
         ),
       ),
     );
   }
-
 }
