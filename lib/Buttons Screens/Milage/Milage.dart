@@ -1,12 +1,14 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/Buttons Screens/Main Screen/Main Screen.dart';
 import 'package:rescue2/main.dart';
+import 'package:rescue2/screens/user_login/flutter_toast.dart';
 
 class Milage extends StatefulWidget {
   const Milage({Key? key}) : super(key: key);
@@ -111,7 +113,7 @@ class _MilageState extends State<Milage> {
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
                           final milage = controller.text;
-                          createMilage(milage: milage);
+                          createData(coll: 'Maintenance',data: milage,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Milage');
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
                                 return Main_Screen();
@@ -124,12 +126,5 @@ class _MilageState extends State<Milage> {
       ),
     );
   }
-  Future createMilage({required String milage}) async {
-    final docMilage = FirebaseFirestore.instance.collection('Milage').doc('milage');
-    final json = {
-      'Milage':milage,
-      'Date':DateTime.now(),
-    };
-    await docMilage.set(json);
-  }
+
 }
