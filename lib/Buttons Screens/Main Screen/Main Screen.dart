@@ -1,9 +1,12 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/navigation_bar.dart';
+import 'package:rescue2/screens/user_login/flutter_toast.dart';
 
 import '../Battery/Battery.dart';
 import '../Brakes/Brakes.dart';
@@ -123,10 +126,13 @@ class _Main_ScreenState extends State<Main_Screen> {
                   ),
                   //This is the function or the action that will be done when the user presses this specific button
                   onPressed: () {
-                    Navigator.push(context,
+                    FirebaseFirestore.instance.collection("Maintenance").doc("").collection("Milage").doc("Milage").get().then((value) {
+                      showToast2("Battery ${value.get("Milage").toString()}");
+                    });
+                   /* Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
                       return Milage();
-                    }));
+                    }));*/
                   },
                 ),
                 //This box is used to put space between the buttons
