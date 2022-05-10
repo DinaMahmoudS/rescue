@@ -96,43 +96,183 @@ class _TimelineState extends State<Timeline> {
                 width: double.infinity,
                 height: double.infinity,
                 color: Mycolor.white,
-                  child: Card(
-shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    margin: EdgeInsets.only(bottom: 480,right: 10.0,left: 10.0,top: 5.0),
-                    color: Colors.transparent,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-
-                        children: [
-                          TextField(
-                            decoration: InputDecoration(
-                              hoverColor: Colors.white,
-                              hintText:
-                              "Enter the date You put the battery in the car",
-                              icon: Icon(
-                                Icons.calendar_today_outlined,
-                                color: Colors.blue,
-                              ),
-                            ),
-                            keyboardType: TextInputType.datetime,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                            //  borderRadius: ,
+                              color: Mycolor.red
                           ),
-                          TextField(
-                            decoration: InputDecoration(
-                              hoverColor: Colors.white,
-                              hintText:
-                              "Enter the date You put the battery in the car",
-                              icon: Icon(
-                                Icons.calendar_today_outlined,
-                                color: Colors.blue,
-                              ),
-                            ),
-                            keyboardType: TextInputType.datetime,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                children: [
+                                  Text("Mailage",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                  SizedBox(height: 10,),
+                                  Text("enter the date",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //   fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text("enter your milage",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //     fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ]),
                           ),
 
-                        ],
+
+                        ),
                       ),
-                    ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                          //  borderRadius: ,
+                            color: Mycolor.red
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text("Mailage",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+
+                        SizedBox(height: 10,),
+                        Text("enter the date",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                             //   fontWeight: FontWeight.bold
+                            ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text("enter your milage",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                         //     fontWeight: FontWeight.bold
+                            ),
+                        ),
+                        ]),
+                          ),
+
+
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                            //  borderRadius: ,
+                              color: Mycolor.red
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                children: [
+                                  Text("Mailage",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                  SizedBox(height: 10,),
+                                  Text("enter the date",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //   fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text("enter your milage",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //     fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ]),
+                          ),
+
+
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                            //  borderRadius: ,
+                              color: Mycolor.red
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                children: [
+                                  Text("Mailage",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                  SizedBox(height: 10,),
+                                  Text("enter the date",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //   fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text("enter your milage",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //     fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ]),
+                          ),
+
+
+                        ),
+                      ),
+
+
+                      //SizedBox(height: 5,),
+                    ],
                   ),
 
 
