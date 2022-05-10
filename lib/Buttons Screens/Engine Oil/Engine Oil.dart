@@ -1,10 +1,13 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/Buttons%20Screens/Main%20Screen/Main%20Screen.dart';
 import 'package:rescue2/screens/colors.dart';
+
+import '../../screens/user_login/flutter_toast.dart';
 
 
 class Engine_Oil extends StatefulWidget {
@@ -109,8 +112,9 @@ class _Engine_OilState extends State<Engine_Oil> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-                          final oil = controller.text;
-                          createOil(oil: oil);
+                          final battery = controller.text;
+                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Engine Oil');
+
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
                                 return Main_Screen();
@@ -122,13 +126,5 @@ class _Engine_OilState extends State<Engine_Oil> {
         ),
       ),
     );
-  }
-  Future createOil({required String oil}) async {
-    final docOil = FirebaseFirestore.instance.collection('Engine oil').doc('Engine oil');
-    final json = {
-      'Milage last changed oil':oil,
-      'Date':DateTime.now(),
-    };
-    await docOil.set(json);
   }
 }

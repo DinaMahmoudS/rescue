@@ -115,7 +115,7 @@ class _SignupState extends State<Signup> {
           }
 
           if (state is UserSignupErrorState) {
-            return showToast2();
+            return ;
           }
         },
         builder: (context, state) {
