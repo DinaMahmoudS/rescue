@@ -1,6 +1,6 @@
 import'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/home.dart';
+import 'package:rescue2/screens/navigation_bar.dart';
 
 class Report extends StatefulWidget {
   const Report({Key? key}) : super(key: key);

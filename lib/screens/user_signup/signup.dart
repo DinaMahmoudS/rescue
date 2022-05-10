@@ -70,12 +70,7 @@ class _SignupState extends State<Signup> {
       await ImagePicker().pickImage(
           source: ImageSource.gallery).then((value){
         setState(() {
-
-          print("value = ${value}");
-          print("path = ${value!.path}");
-        //  print("path = ${value as File}");
-
-       //   uploadFile(_image);
+          _image = image.value as File;
         });
       });
 
@@ -85,7 +80,7 @@ class _SignupState extends State<Signup> {
 
   }
 
-  Future uploadFile(File _image) async {
+  Future uploadFile() async {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child("Commercial" + DateTime.now().toString());
     UploadTask uploadTask = ref.putFile(_image);

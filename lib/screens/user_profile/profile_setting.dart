@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/user_signup/signup.dart';
+import 'package:rescue2/screens/user_signup/signup2.dart';
 
+import '../user_signup/signup.dart';
 
 
 class profile extends StatelessWidget {
@@ -228,7 +229,7 @@ class profile extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
-                                return Signup();
+                                return Signup2();
                               }));
                         },
                         child: const Text('Save',
@@ -239,6 +240,31 @@ class profile extends StatelessWidget {
                 ),
 
                  const SizedBox(height: 70),
+      Column(
+        children: [
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Mycolor.red,
+                fixedSize: const Size(300, 43),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+              ),
+              onPressed: () {
+
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return Signup();
+                    }));
+              },
+              child: const Text(''
+                  'log out',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ))),
+        ],
+      ),
+
 
               ],
             ),

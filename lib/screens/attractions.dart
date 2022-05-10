@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/home.dart';
+import 'package:rescue2/screens/navigation_bar.dart';
 
 
 class Attraction extends StatefulWidget {
