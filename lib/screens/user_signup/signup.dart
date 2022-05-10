@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,20 +41,19 @@ class _SignupState extends State<Signup> {
 
    final formKey = GlobalKey<FormState>();
 
+  //UploadTask? task;
+  File? file;
+
    //File? image;
 
-   Future pickImage() async{
-       try {
-           final image = await ImagePicker().pickImage(
-               source: ImageSource.gallery);
-           if (image == null) return;
+  Future selectFile() async {
+      final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
-           final imageTemporary = File(image.path);
-           setState(() => this.image = imageTemporary as TextEditingController);
-       } on PlatformException catch (e){
-           print('falid to pick');
-       }
-   }
+      if (result == null) return;
+      final path = result.files.single.path!;
+
+      setState(() => file = File(path));
+  }
 
 
    bool _isObscure = true;
@@ -61,6 +61,7 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
+      //final fileName = file != null ? basename(file!.path) : 'No File Selected';
 
       return BlocProvider(
         create: (BuildContext context)=> UserSignupCubit(),
@@ -77,7 +78,7 @@ class _SignupState extends State<Signup> {
 
             if(state is UserSignupErrorState)
             {
-                return showToast2();
+                return showToast2(state.error);
 
             }
         },
@@ -361,7 +362,7 @@ class _SignupState extends State<Signup> {
                   title: 'Commercial Registration photo',
                   icon: Icons.image_outlined,
                   prefixIcon: Mycolor.teal,
-                  onClicked: () =>pickImage(),
+                  onClicked: () =>selectFile(),
               ),
           ),
 

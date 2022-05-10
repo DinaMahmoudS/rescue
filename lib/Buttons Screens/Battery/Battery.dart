@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/Buttons%20Screens/Main%20Screen/Main%20Screen.dart';
 import 'package:rescue2/screens/colors.dart';
+import 'package:rescue2/screens/user_login/flutter_toast.dart';
 
 
 class Battery extends StatefulWidget {
@@ -114,7 +116,7 @@ class _BatteryState extends State<Battery> {
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
                           final battery = controller.text;
-                          createBattery(battery: battery);
+                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Battery');
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
                                 return Main_Screen();
@@ -127,12 +129,5 @@ class _BatteryState extends State<Battery> {
       ),
     );
   }
-  Future createBattery({required String battery}) async {
-    final docBattery = FirebaseFirestore.instance.collection('Battery').doc('battery');
-    final json = {
-      'Date of Battery installation':battery,
-      'Date of today':DateTime.now(),
-    };
-    await docBattery.set(json);
-  }
+
 }
