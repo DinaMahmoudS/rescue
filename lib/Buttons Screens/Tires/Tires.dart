@@ -1,10 +1,13 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/Buttons%20Screens/Main%20Screen/Main%20Screen.dart';
 import 'package:rescue2/screens/colors.dart';
+
+import '../../screens/user_login/flutter_toast.dart';
 
 class Tires extends StatefulWidget {
   const Tires({Key? key}) : super(key: key);
@@ -108,8 +111,8 @@ class _TiresState extends State<Tires> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-                          final tires = controller.text;
-                          createTires(tires: tires);
+                          final battery = controller.text;
+                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Tires');
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
                                 return Main_Screen();
@@ -121,13 +124,5 @@ class _TiresState extends State<Tires> {
         ),
       ),
     );
-  }
-  Future createTires({required String tires}) async {
-    final docTires = FirebaseFirestore.instance.collection('Tires').doc('tires');
-    final json = {
-      'Milage Tires Changed at':tires,
-      'Date':DateTime.now(),
-    };
-    await docTires.set(json);
   }
 }

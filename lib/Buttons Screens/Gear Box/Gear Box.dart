@@ -1,10 +1,13 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/Buttons%20Screens/Main%20Screen/Main%20Screen.dart';
 import 'package:rescue2/screens/colors.dart';
+
+import '../../screens/user_login/flutter_toast.dart';
 
 
 class Gear_Box extends StatefulWidget {
@@ -109,8 +112,9 @@ class _Gear_BoxState extends State<Gear_Box> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-                          final gear_box = controller.text;
-                          createGear_Box(gear_box: gear_box);
+                          final battery = controller.text;
+                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Gear Box');
+
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
                                 return Main_Screen();
@@ -122,13 +126,5 @@ class _Gear_BoxState extends State<Gear_Box> {
         ),
       ),
     );
-  }
-  Future createGear_Box({required String gear_box}) async {
-    final docGear_Box = FirebaseFirestore.instance.collection('Gear box').doc('Gear box');
-    final json = {
-      'Milage':gear_box,
-      'Date':DateTime.now(),
-    };
-    await docGear_Box.set(json);
   }
 }

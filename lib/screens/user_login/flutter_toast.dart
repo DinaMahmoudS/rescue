@@ -21,7 +21,7 @@ void showToast2(String msg)=> Fluttertoast.showToast(
 Future createData({required String coll ,required String coll2 , required String doc,required String data}) async {
   final docMilage = FirebaseFirestore.instance.collection(coll).doc(doc).collection(coll2).doc(coll2);
   final json = {
-    'Milage':data,
+    'Content':data,
     'Date':DateTime.now(),
   };
   await docMilage.set(json).then((value) {
