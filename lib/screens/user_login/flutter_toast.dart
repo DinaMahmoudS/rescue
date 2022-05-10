@@ -5,35 +5,56 @@ import 'package:rescue2/Buttons%20Screens/Milage/Milage.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:app_settings/app_settings.dart';
 
-void showToast()=> Fluttertoast.showToast(
-  msg: "this email is not found",
+var Content , Date;
+
+void showToast() => Fluttertoast.showToast(
+      msg: "this email is not found",
       fontSize: 18,
-  backgroundColor: Mycolor.darkblue,
-   // AppSettings.openLocationSettings();
+      backgroundColor: Mycolor.darkblue,
+      // AppSettings.openLocationSettings();
+    );
 
-);
-void showToast2(String msg)=> Fluttertoast.showToast(
-  msg: msg,
-  fontSize: 18,
-  backgroundColor: Mycolor.darkblue,
+void showToast2(String msg) => Fluttertoast.showToast(
+      msg: msg,
+      fontSize: 18,
+      backgroundColor: Mycolor.darkblue,
+    );
 
-);
-void printText(){
-  FirebaseFirestore.instance.collection("Maintenance").doc("").collection("Milage").doc("Milage").get().then((value) {
-    showToast2("Battery ${value.get("Milage").toString()}");
+String printText(
+    {required String UID, required String coll, required String doc}) {
+  FirebaseFirestore.instance
+      .collection("Maintenance")
+      .doc(UID)
+      .collection(coll)
+      .doc(doc)
+      .get()
+      .then((value) {
+    Content = value.get("Content").toString();
+    Date = value.get("Date").toString();
+  }).onError((error, stackTrace) {
+    Content = error.toString();
+    Date = error.toString();
   });
-  return print("$Milage");
+  if (Content != null && Date != null) return "${Content} ${Date} ";
+  return "${Content}  ${Date} ";
 }
 
-Future createData({required String coll ,required String coll2 , required String doc,required String data}) async {
-  final docMilage = FirebaseFirestore.instance.collection(coll).doc(doc).collection(coll2).doc(coll2);
+Future createData(
+    {required String coll,
+    required String coll2,
+    required String doc,
+    required String data}) async {
+  final docMilage = FirebaseFirestore.instance
+      .collection(coll)
+      .doc(doc)
+      .collection(coll2)
+      .doc(coll2);
   final json = {
-    'Content':data,
-    'Date':DateTime.now(),
+    'Content': data,
+    'Date': DateTime.now().toString(),
   };
   await docMilage.set(json).then((value) {
     showToast2("Done");
-
   }).onError((error, stackTrace) {
     showToast2(error.toString());
   });
