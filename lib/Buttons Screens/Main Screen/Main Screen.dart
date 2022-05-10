@@ -126,13 +126,13 @@ class _Main_ScreenState extends State<Main_Screen> {
                   ),
                   //This is the function or the action that will be done when the user presses this specific button
                   onPressed: () {
-                    FirebaseFirestore.instance.collection("Maintenance").doc("").collection("Milage").doc("Milage").get().then((value) {
-                      showToast2("Battery ${value.get("Milage").toString()}");
-                    });
-                   /* Navigator.push(context,
+                    // FirebaseFirestore.instance.collection("Maintenance").doc("").collection("Milage").doc("Milage").get().then((value) {
+                    //   showToast2("Battery ${value.get("Milage").toString()}");
+                    // });
+                    Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
                       return Milage();
-                    }));*/
+                    }));
                   },
                 ),
                 //This box is used to put space between the buttons
