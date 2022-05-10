@@ -96,14 +96,50 @@ class _TimelineState extends State<Timeline> {
                 width: double.infinity,
                 height: double.infinity,
                 color: Mycolor.white,
-                child: Column(
-                  children: [
-                  ],
+                  child: Card(
+shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    margin: EdgeInsets.only(bottom: 480,right: 10.0,left: 10.0,top: 5.0),
+                    color: Colors.transparent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              hoverColor: Colors.white,
+                              hintText:
+                              "Enter the date You put the battery in the car",
+                              icon: Icon(
+                                Icons.calendar_today_outlined,
+                                color: Colors.blue,
+                              ),
+                            ),
+                            keyboardType: TextInputType.datetime,
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                              hoverColor: Colors.white,
+                              hintText:
+                              "Enter the date You put the battery in the car",
+                              icon: Icon(
+                                Icons.calendar_today_outlined,
+                                color: Colors.blue,
+                              ),
+                            ),
+                            keyboardType: TextInputType.datetime,
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
+
+
                 ),
 
               ),
             )),
-      ),
     );
   }
 }

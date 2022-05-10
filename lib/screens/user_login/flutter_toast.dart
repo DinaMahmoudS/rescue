@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rescue2/Buttons%20Screens/Milage/Milage.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:app_settings/app_settings.dart';
 
@@ -17,6 +18,12 @@ void showToast2(String msg)=> Fluttertoast.showToast(
   backgroundColor: Mycolor.darkblue,
 
 );
+void printText(){
+  FirebaseFirestore.instance.collection("Maintenance").doc("").collection("Milage").doc("Milage").get().then((value) {
+    showToast2("Battery ${value.get("Milage").toString()}");
+  });
+  return print("$Milage");
+}
 
 Future createData({required String coll ,required String coll2 , required String doc,required String data}) async {
   final docMilage = FirebaseFirestore.instance.collection(coll).doc(doc).collection(coll2).doc(coll2);
