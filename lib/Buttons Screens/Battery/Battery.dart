@@ -115,23 +115,13 @@ class _BatteryState extends State<Battery> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-                          String v = printText(
-                              UID: '${FirebaseAuth.instance.currentUser!.uid}',
-                              coll: 'Battery',
-                              doc: 'Battery');
 
-
-                          if (!v.contains("null")){
-                            var a = v.split(" ");
-                            showToast2(a[0]);
-                             showToast2(a[1]);
-                          }
-                          // final battery = controller.text;
-                          // createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Battery');
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (BuildContext context) {
-                          //       return Main_Screen();
-                          //     }));
+                          final battery = controller.text;
+                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Battery');
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return Main_Screen();
+                              }));
                         },
                         child: Text("Done"))),
               ]),

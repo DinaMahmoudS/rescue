@@ -32,8 +32,8 @@ String printText(
     Content = value.get("Content").toString();
     Date = value.get("Date").toString();
   }).onError((error, stackTrace) {
-    Content = error.toString();
-    Date = error.toString();
+    Content = "content = ${error.toString()}";
+    Date = "date = ${error.toString()}";
   });
   if (Content != null && Date != null) return "${Content} ${Date} ";
   return "${Content}  ${Date} ";
