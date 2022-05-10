@@ -18,6 +18,7 @@ class Login extends StatefulWidget{
 }
 
 class _LoginState extends State<Login> {
+
    var emailController = TextEditingController();
 
    var passwordController = TextEditingController();

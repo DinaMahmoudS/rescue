@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +13,7 @@ import '../navigation_bar.dart';
 import '../user_login/login.dart';
 import 'package:flutter/rendering.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
+
 
 class Signup extends StatefulWidget {
    Signup({Key? key}) : super(key: key);

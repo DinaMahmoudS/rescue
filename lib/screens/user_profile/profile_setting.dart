@@ -2,13 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_signup/signup2.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../user_signup/signup.dart';
 
+class profile extends StatefulWidget {
 
-class profile extends StatelessWidget {
-  const profile({Key? key}) : super(key: key);
+   const profile({Key? key}) : super(key: key);
 
+  @override
+  State<profile> createState() => _profileState();
+}
+
+class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -238,8 +243,7 @@ class profile extends StatelessWidget {
                             ))),
                   ],
                 ),
-
-                 const SizedBox(height: 70),
+      const SizedBox(height: 70),
       Column(
         children: [
           ElevatedButton(
@@ -251,13 +255,8 @@ class profile extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                      return Signup();
-                    }));
               },
-              child: const Text(''
+              child: const Text(
                   'log out',
                   style: TextStyle(
                     fontSize: 18,
