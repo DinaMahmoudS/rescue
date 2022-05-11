@@ -28,7 +28,7 @@ class _BatteryState extends State<Battery> {
       home: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/Maintenance.jpg"),
+            image: AssetImage("assets/images/Battery.jpg"),
             fit: BoxFit.cover,
           ),
         ),
