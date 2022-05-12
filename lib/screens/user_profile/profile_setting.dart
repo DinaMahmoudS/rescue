@@ -239,6 +239,7 @@ class profile extends StatelessWidget {
                   ],
                 ),
 
+
                  const SizedBox(height: 70),
       Column(
         children: [
