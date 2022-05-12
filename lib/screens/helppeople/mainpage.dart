@@ -78,6 +78,7 @@ class _HelppeopleState extends State<Helppeople> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                         ),
+
                         onPressed: () {
                          /* LocationService _locationService = LocationService();
                           _locationService.sendLocationToDataBase(context); */
