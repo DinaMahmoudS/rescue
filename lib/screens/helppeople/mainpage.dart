@@ -79,8 +79,9 @@ class _HelppeopleState extends State<Helppeople> {
                           ),
                         ),
                         onPressed: () {
-                          LocationService _locationService = LocationService();
-                          _locationService.sendLocationToDataBase(context);
+
+                         /* LocationService _locationService = LocationService();
+                          _locationService.sendLocationToDataBase(context);*/
                         },
                         child: const Text(
                           'Request',
