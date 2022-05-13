@@ -112,11 +112,11 @@ class _SignupState extends State<Signup> {
                 MaterialPageRoute(builder: (BuildContext context) {
               return const Home();
             }));
-            AppSettings.openLocationSettings();
+           // AppSettings.openLocationSettings();
           }
 
           if (state is UserSignupErrorState) {
-            return;
+            return showToast2(state.error);
           }
         },
         builder: (context, state) {
@@ -379,7 +379,7 @@ class _SignupState extends State<Signup> {
                                       }
                                       final path = results.files.single.path!;
                                       final fileName = results.files.single.name;
-                                      storage.uploadFile(path, fileName).then((value) => print('Done'));
+                                      storage.uploadFile(path, fileName).then((value) => showToast());
                                       print(path);
                                       print(fileName);
                                     },

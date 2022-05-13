@@ -2,22 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rescue2/Buttons%20Screens/Milage/Milage.dart';
-import 'package:rescue2/screens/colors.dart';
 import 'package:app_settings/app_settings.dart';
+import 'package:rescue2/screens/colors.dart';
 
 var Content , Date;
 
 void showToast() => Fluttertoast.showToast(
-      msg: "this email is not found",
+      msg: "Saved",
       fontSize: 18,
       backgroundColor: Mycolor.darkblue,
+      timeInSecForIosWeb: 2,
       // AppSettings.openLocationSettings();
     );
 
 void showToast2(String msg) => Fluttertoast.showToast(
       msg: msg,
       fontSize: 18,
-      backgroundColor: Mycolor.darkblue,
+      backgroundColor: Colors.red,
+      timeInSecForIosWeb: 2,
     );
 
 String printText(
