@@ -94,6 +94,7 @@ class _TimelineState extends State<Timeline> {
                   ],
                 ),
               ],
+
             ),
             body: Center(
               child: Container(
