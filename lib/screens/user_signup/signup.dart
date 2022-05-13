@@ -1,13 +1,10 @@
 import 'dart:io';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:rescue2/network/remote/Storage_Service.dart';
-
 //import 'package:rescue2/screens/Home.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_signup/cubit.dart';
@@ -71,24 +68,27 @@ class _SignupState extends State<Signup> {
 
   Future chooseFile() async {
     try {
-      await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      await ImagePicker().pickImage(
+          source: ImageSource.gallery).then((value){
         setState(() {
           _image = image.value as File;
         });
       });
-    } on PlatformException catch (e) {
+
+    } on PlatformException catch (e){
       print('falid to pick');
     }
+
   }
 
   Future uploadFile() async {
     FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref =
-        storage.ref().child("Commercial" + DateTime.now().toString());
+    Reference ref = storage.ref().child("Commercial" + DateTime.now().toString());
     UploadTask uploadTask = ref.putFile(_image);
     uploadTask.then((res) {
       res.ref.getDownloadURL();
     });
+
 
     ref.getDownloadURL().then((fileURL) {
       setState(() {
@@ -102,7 +102,6 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
-    final Storage storage = Storage();
     return BlocProvider(
       create: (BuildContext context) => UserSignupCubit(),
       child: BlocConsumer<UserSignupCubit, UserSignupStates>(
@@ -116,7 +115,7 @@ class _SignupState extends State<Signup> {
           }
 
           if (state is UserSignupErrorState) {
-            return;
+            return showToast2();
           }
         },
         builder: (context, state) {
@@ -361,28 +360,7 @@ class _SignupState extends State<Signup> {
                                     title: 'Commercial Registration photo',
                                     icon: Icons.image_outlined,
                                     prefixIcon: Mycolor.teal,
-                                    onClicked: () async {
-                                      final results =
-                                          await FilePicker.platform.pickFiles(
-                                        allowMultiple: false,
-                                        type: FileType.custom,
-                                        allowedExtensions: ['png', 'jpg'],
-                                      );
-                                      if (results == null) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text('No file selected'),
-                                          ),
-                                        );
-                                        return null;
-                                      }
-                                      final path = results.files.single.path!;
-                                      final fileName = results.files.single.name;
-                                      storage.uploadFile(path, fileName).then((value) => print('Done'));
-                                      print(path);
-                                      print(fileName);
-                                    },
+                                    onClicked: () => chooseFile(),
                                   ),
                                 ),
                               ],
