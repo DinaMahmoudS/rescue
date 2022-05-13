@@ -78,11 +78,15 @@ class _HelppeopleState extends State<Helppeople> {
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                         ),
+
                         onPressed: () {
-                          LocationService _locationService = LocationService();
-                          _locationService.sendLocationToDataBase(context);
+                         /* LocationService _locationService = LocationService();
+                          _locationService.sendLocationToDataBase(context); */
 
-
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return Request();
+                              }));
                         },
                         child: const Text(
                           'Request',

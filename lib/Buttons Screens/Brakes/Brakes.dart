@@ -1,10 +1,13 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/Buttons%20Screens/Main%20Screen/Main%20Screen.dart';
 import 'package:rescue2/screens/colors.dart';
+
+import '../../screens/user_login/flutter_toast.dart';
 
 
 class Brakes extends StatefulWidget {
@@ -109,8 +112,8 @@ class _BrakesState extends State<Brakes> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-                          final brakes = controller.text;
-                          createBrakes(brakes: brakes);
+                          final battery = controller.text;
+                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Brakes');
                           Navigator.push(context,
                               MaterialPageRoute(builder: (BuildContext context) {
                                 return Main_Screen();
@@ -123,12 +126,5 @@ class _BrakesState extends State<Brakes> {
       ),
     );
   }
-  Future createBrakes({required String brakes}) async {
-    final docBrakes = FirebaseFirestore.instance.collection('Brakes').doc('brakes');
-    final json = {
-      'Milage brakes changed at':brakes,
-      'Date':DateTime.now(),
-    };
-    await docBrakes.set(json);
   }
-}
+

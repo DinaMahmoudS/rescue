@@ -1,11 +1,14 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/ButtomSheatHelper.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/Buttons Screens/Main Screen/Main Screen.dart';
+
+import '../../screens/user_login/flutter_toast.dart';
 
 class Timeline extends StatefulWidget {
   const Timeline({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class Timeline extends StatefulWidget {
 }
 
 class _TimelineState extends State<Timeline> {
+  var a;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -96,14 +100,205 @@ class _TimelineState extends State<Timeline> {
                 width: double.infinity,
                 height: double.infinity,
                 color: Mycolor.white,
-                child: Column(
-                  children: [
-                  ],
+                  child: Column(
+                    children: [
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                            //  borderRadius: ,
+                              color: Mycolor.red
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                children: [
+                                  Text("Mailage",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                  SizedBox(height: 10,),
+                                  Text("enter the date",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //   fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text("enter your milage",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //     fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ]),
+                          ),
+
+
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                          //  borderRadius: ,
+                            color: Mycolor.red
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text("Mailage",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+
+                        SizedBox(height: 10,),
+                        Text("enter the date",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                             //   fontWeight: FontWeight.bold
+                            ),
+                        ),
+                        SizedBox(height: 10,),
+                        Text("enter your milage",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                         //     fontWeight: FontWeight.bold
+                            ),
+                        ),
+                        ]),
+                          ),
+
+
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                            //  borderRadius: ,
+                              color: Mycolor.red
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                children: [
+                                  Text("Mailage",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                  SizedBox(height: 10,),
+                                  Text("enter the date",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //   fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text("enter your milage",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //     fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ]),
+                          ),
+
+
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 120,
+                          width: 370,
+                          decoration: BoxDecoration(
+                            //  borderRadius: ,
+                              color: Mycolor.red
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                                children: [
+                                  Text("Mailage",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+
+                                  SizedBox(height: 10,),
+                                  Text("enter the date",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //   fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text("enter your milage",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      //     fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ]),
+                          ),
+
+
+                        ),
+                      ),
+
+
+                      //SizedBox(height: 5,),
+                    ],
+                  ),
+
+
                 ),
 
               ),
             )),
-      ),
     );
+  }
+  String getData(String coll, int i) {
+    setState(() {
+      String v = printText(
+          UID: '${FirebaseAuth.instance.currentUser!.uid}',
+          coll: coll,
+          doc: coll);
+      if (!v.contains("null")) {
+        a = v.split(" ");
+        showToast2(a[0]);
+        showToast2(a[1]);
+      }
+    });
+
+    return a[i];
   }
 }
