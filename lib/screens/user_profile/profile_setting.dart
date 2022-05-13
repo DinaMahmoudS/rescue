@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_signup/signup2.dart';
 
+import '../SplashScreen.dart';
 import '../user_signup/signup.dart';
 
 
@@ -239,7 +241,7 @@ class profile extends StatelessWidget {
                   ],
                 ),
 
-                 const SizedBox(height: 70),
+
       Column(
         children: [
           ElevatedButton(
@@ -252,9 +254,11 @@ class profile extends StatelessWidget {
               ),
               onPressed: () {
 
+                FirebaseAuth.instance.signOut();
+
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                      return Signup();
+                      return SplashScreen();
                     }));
               },
               child: const Text(''
@@ -264,7 +268,7 @@ class profile extends StatelessWidget {
                   ))),
         ],
       ),
-
+      const SizedBox(height: 70),
 
               ],
             ),
