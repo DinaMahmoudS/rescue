@@ -90,7 +90,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                   hintText:
                   "other",
                 ),
-                keyboardType: TextInputType.datetime,
+                keyboardType: TextInputType.text,
               ),
             ],
           ),
