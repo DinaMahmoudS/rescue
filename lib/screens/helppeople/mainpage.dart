@@ -9,7 +9,7 @@ import '../navigation_bar.dart';
 
 class Helppeople extends StatefulWidget {
   const Helppeople({Key? key}) : super(key: key);
-
+//help people
   @override
   State<Helppeople> createState() => _HelppeopleState();
 }

@@ -1,6 +1,9 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
+import '../user_login/flutter_toast.dart';
 import 'chat.dart';
 
 class PanelWidget extends StatefulWidget{
@@ -16,8 +19,17 @@ class PanelWidget extends StatefulWidget{
 
 class _PanelWidgetState extends State<PanelWidget> {
 
-  int? _value = 1;
+  String? _value = "1";
+  String dropdownitemsvalue = 'KIA';
+  late var otherController = TextEditingController() ;
 
+  var carModel = [
+    "KIA",
+    "Nissan",
+    "Toyota",
+    "BMW",
+    "Mercedes",
+  ];
 
   @override
   Widget build(BuildContext context) => ListView(
@@ -50,32 +62,18 @@ class _PanelWidgetState extends State<PanelWidget> {
             padding: const EdgeInsets.only(left: 10, top: 20,),
             child:DropdownButton(
               dropdownColor: Mycolor.Beige,
-              value: _value,
-              items: const [
-                DropdownMenuItem(
-                  child: Text("Filling With Gasoline",
-                    style: TextStyle(fontSize: 20,
-                        fontWeight: FontWeight.bold, color: Colors.black),),
-                  value: 1,
-                ),
-                DropdownMenuItem(
-                  child: Text("Charging Battery",
-                    style: TextStyle(fontSize: 20,
-                        fontWeight: FontWeight.bold,color: Colors.black),),
-                  value: 2,
-                ),
-                DropdownMenuItem(
-                  child: Text("Drag to the nearest Service",
-                    style: TextStyle(fontSize: 20,
-                        fontWeight: FontWeight.bold,color: Colors.black),),
-                  value: 3,
-                ),
+              value: dropdownitemsvalue,
+              items: carModel.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
 
-              ],
-
-              onChanged: (int? value) {
+              onChanged: (String? newValue) {
                 setState(() {
-                  _value = value;});
+                  dropdownitemsvalue = newValue!;
+                });
               },
               //  hint:Text("Select item"),
             ),
@@ -84,7 +82,8 @@ class _PanelWidgetState extends State<PanelWidget> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              TextField(
+              TextFormField(
+                controller: otherController,
                 decoration: InputDecoration(
                   hoverColor: Colors.white,
                   hintText:
@@ -110,6 +109,16 @@ class _PanelWidgetState extends State<PanelWidget> {
                     ),
                   ),
                   onPressed: () {
+                    FirebaseFirestore.instance.collection("help users").add({
+                      "user_id": FirebaseAuth.instance.currentUser!.uid,
+                      "problem": dropdownitemsvalue,
+                      "location": "Cairo",
+                      "status": "pending",
+                      "other": otherController.text,
+
+                    }).whenComplete(() => {
+                    showToast2("${dropdownitemsvalue}")
+                    });
                   },
                   child: const Text(
                     'Request',
