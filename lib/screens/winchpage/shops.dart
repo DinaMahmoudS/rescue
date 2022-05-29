@@ -77,6 +77,6 @@ class _ShopsState extends State<Shops> {
 
   Widget buildWinshs(Winshs winshs) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Item(context,  location: winshs.location, phone: winshs.phone, status: winshs.status, name: winshs.name),
+        child: Item(context,  location: winshs.location, phone: winshs.phone, status: winshs.status, name: winshs.name, uuid: winshs.uuid,),
       );
 }

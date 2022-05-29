@@ -8,7 +8,7 @@ import 'package:rescue2/screens/user_login/flutter_toast.dart';
 import '../colors.dart';
 
 Widget Item(BuildContext context ,
-{ required String name , required String location , required String status ,  required String phone }) {
+{required String uuid , required String name , required String location , required String status ,  required String phone  }) {
   return GestureDetector(
     onTap: () {
       showMaterialModalBottomSheet(
@@ -62,7 +62,8 @@ Widget Item(BuildContext context ,
                               FirebaseFirestore.instance.collection("requset winsh").add({
                                 "name": name,
                                 "phone": phone,
-                                "uuid": FirebaseAuth.instance.currentUser!.uid,
+                                "uuid": uuid,
+                                "userid": FirebaseAuth.instance.currentUser!.uid,
                                 "location": location,
                                 "status": "pending",
                                 "time": DateTime.now().toString(),
