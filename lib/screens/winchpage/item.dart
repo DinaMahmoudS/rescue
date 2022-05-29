@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:rescue2/screens/user_login/flutter_toast.dart';
 import '../colors.dart';
 
 Widget Item(BuildContext context ,
-{required String text}) {
+{ required String name , required String location , required String status ,  required String phone }) {
   return GestureDetector(
     onTap: () {
       showMaterialModalBottomSheet(
@@ -32,7 +35,7 @@ Widget Item(BuildContext context ,
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'مساكن أطلس - مدينة نصر',
+                        location,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -46,23 +49,44 @@ Widget Item(BuildContext context ,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          text,
+                          location,
                           style: TextStyle(
                             color: Mycolor.darkblue,
                           ),
                         ),
-                        Container(
-                          alignment: Alignment.center,
-                          width: 100,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Mycolor.darkblue,
-                          ),
-                          child: Text(
-                            'Request',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
+                        InkWell(
+                          onTap: () {
+                            if(status == "off"){
+                              showToast2("This person is offline");
+                            }else {
+                              FirebaseFirestore.instance.collection("requset winsh").add({
+                                "name": name,
+                                "phone": phone,
+                                "uuid": FirebaseAuth.instance.currentUser!.uid,
+                                "location": location,
+                                "status": "pending",
+                                "time": DateTime.now().toString(),
+                              }).whenComplete(() => {
+                                showToast2("Request sent")
+                              });
+
+
+                            }
+
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 100,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Mycolor.darkblue,
+                            ),
+                            child: Text(
+                              'Request',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ),
@@ -188,7 +212,7 @@ Widget Item(BuildContext context ,
                               height: 5,
                             ),
                             Text(
-                              '01020888802',
+                              phone,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -253,7 +277,7 @@ Widget Item(BuildContext context ,
                               height: 5,
                             ),
                             Text(
-                              '24 Hours',
+                              '${status}',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -547,7 +571,7 @@ Widget Item(BuildContext context ,
                   Column(
                     children: [
                       Text(
-                        'ونش',
+                    name,
                         style: TextStyle(color: Mycolor.red),
                       ),
                       Row(
@@ -556,7 +580,7 @@ Widget Item(BuildContext context ,
                             Icons.alarm,
                             color: Mycolor.red,
                           ),
-                          Text(' 24 Hours')
+                          Text("${status}")
                         ],
                       )
                     ],

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue2/pojo/timline.dart';
 import 'package:rescue2/screens/ButtomSheatHelper.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/Buttons Screens/Main Screen/Main Screen.dart';
@@ -19,6 +20,7 @@ class Timeline extends StatefulWidget {
 
 class _TimelineState extends State<Timeline> {
   var a;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -102,236 +104,162 @@ class _TimelineState extends State<Timeline> {
                 color: Mycolor.white,
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 80,
-                        width: 350,
-                        decoration: BoxDecoration(
-                            color: Mycolor.red),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(children: [
-                            Text(
-                              "Mailage",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "${getData("Milage",0)}",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //   fontWeight: FontWeight.bold
-                              ),
-                            ),
 
-                            Text(
-                              "${getData("Milage",1)}",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ]),
-                        ),
+                    Expanded(
+                      child: StreamBuilder<List<timeline>>(
+                        stream: readTimline("Milage"),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final users = snapshot.data!;
+                            if (users.contains("false")) {
+                              
+                              return Text(
+                                "no friends for you",
+                                style: TextStyle(color: Colors.black),
+                              );
+                            } else {
+                              
+                              // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                              return ListView(
+                                children: users.map(buildTimeLine).toList(),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              "hasError ${snapshot.error}",
+                              style: TextStyle(color: Colors.black),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 80,
-                        width: 350,
-                        decoration: BoxDecoration(
-                          //  borderRadius: ,
-                            color: Mycolor.red),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(children: [
-                            Text(
-                              "Mailage",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "${getData("Battery",0)}",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //   fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            Text(
-                              "${getData("Battery",1)}",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //     fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 80,
-                        width: 350,
-                        decoration: BoxDecoration(
-                            color: Mycolor.red),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(children: [
-                            Text(
-                              "Mailage",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "enter the date",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //   fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            Text(
-                              "enter your milage",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //     fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 80,
-                        width: 350,
-                        decoration: BoxDecoration(
-                          //  borderRadius: ,
-                            color: Mycolor.red),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(children: [
-                            Text(
-                              "Mailage",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                    Expanded(
+                      child: StreamBuilder<List<timeline>>(
+                        stream: readTimline("Engine Oil"),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final users = snapshot.data!;
+                            if (users.contains("false")) {
+                              
+                              return Text(
+                                "no friends for you",
+                                style: TextStyle(color: Colors.black),
+                              );
+                            } else {
 
-                            Text(
-                              "enter the date",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //   fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            Text(
-                              "enter your milage",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //     fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ]),
-                        ),
+                              // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                              return ListView(
+                                children: users.map(buildTimeLine).toList(),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              "hasError ${snapshot.error}",
+                              style: TextStyle(color: Colors.black),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 80,
-                        width: 350,
-                        decoration: BoxDecoration(
-                          //  borderRadius: ,
-                            color: Mycolor.red),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(children: [
-                            Text(
-                              "Mailage",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "enter the date",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //   fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            Text(
-                              "enter your milage",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //     fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ]),
-                        ),
+                    Expanded(
+                      child: StreamBuilder<List<timeline>>(
+                        stream: readTimline("Gear Box"),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final users = snapshot.data!;
+                            if (users.contains("false")) {
+                              
+                              return Text(
+                                "no friends for you",
+                                style: TextStyle(color: Colors.black),
+                              );
+                            } else {
+                              
+                              // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                              return ListView(
+                                children: users.map(buildTimeLine).toList(),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              "hasError ${snapshot.error}",
+                              style: TextStyle(color: Colors.black),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 80,
-                        width: 350,
-                        decoration: BoxDecoration(
-                          //  borderRadius: ,
-                            color: Mycolor.red),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(children: [
-                            Text(
-                              "Mailage",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "enter the date",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //   fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            Text(
-                              "enter your milage",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                //     fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ]),
-                        ),
+                    Expanded(
+                      child: StreamBuilder<List<timeline>>(
+                        stream: readTimline("Tires"),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final users = snapshot.data!;
+                            if (users.contains("false")) {
+                              
+                              return Text(
+                                "no friends for you",
+                                style: TextStyle(color: Colors.black),
+                              );
+                            } else {
+
+                              // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                              return ListView(
+                                children: users.map(buildTimeLine).toList(),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              "hasError ${snapshot.error}",
+                              style: TextStyle(color: Colors.black),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
+                    Expanded(
+                      child: StreamBuilder<List<timeline>>(
+                        stream: readTimline("Brakes"),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final users = snapshot.data!;
+                            if (users.contains("false")) {
+                              
+                              return Text(
+                                "no friends for you",
+                                style: TextStyle(color: Colors.black),
+                              );
+                            } else {
+                              // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                              return ListView(
+                                children: users.map(buildTimeLine).toList(),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              "hasError ${snapshot.error}",
+                              style: TextStyle(color: Colors.black),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                    ),
+
                   ],
                 ),
               ),
@@ -339,21 +267,52 @@ class _TimelineState extends State<Timeline> {
         )),
     );
   }
-  String getData(String coll, int i) {
-    setState(() {
-      String v = printText(
-          UID: '${FirebaseAuth.instance.currentUser!.uid}',
-          coll: coll,
-          doc: coll);
 
-      if (!v.contains("null")) {
-        a = v.split(" ");
-        showToast2(a[0]);
-        showToast2(a[1]);
-      }
-    });
+  Stream<List<timeline>> readTimline(String type) =>
+      FirebaseFirestore.instance.collection("Maintenance").doc(FirebaseAuth.instance.currentUser!.uid).collection(type).snapshots().map(
+              (event) => event.docs.map((e) => timeline.fromJson(e.data())).toList());
 
 
-    return a[i];
-  }
+
+  Widget buildTimeLine(timeline t) =>  Padding(
+    padding: const EdgeInsets.all(5.0),
+    child: Container(
+      height: 80,
+      width: 350,
+      decoration: BoxDecoration(
+          color: Mycolor.red),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Column(children: [
+            Text(
+              "${t.name}",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "${t.Date}",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                //   fontWeight: FontWeight.bold
+              ),
+            ),
+            Text(
+              "${t.Content}",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                //     fontWeight: FontWeight.bold
+              ),
+            ),
+          ]),
+        ),
+      )
+    ),
+  );
+
 }

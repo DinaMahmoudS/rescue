@@ -54,6 +54,7 @@ Future createData(
   final json = {
     'Content': data,
     'Date': DateTime.now().toString(),
+    'name' :coll2
   };
   await docMilage.set(json).then((value) {
     showToast2("Done");
