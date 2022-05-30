@@ -114,6 +114,7 @@ class _PanelWidgetState extends State<PanelWidget> {
                       "problem": dropdownitemsvalue,
                       "location": "Cairo",
                       "status": "pending",
+                      "color": "red",
                       "other": otherController.text,
 
                     }).whenComplete(() => {

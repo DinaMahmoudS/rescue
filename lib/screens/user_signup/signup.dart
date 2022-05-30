@@ -112,7 +112,7 @@ class _SignupState extends State<Signup> {
                 MaterialPageRoute(builder: (BuildContext context) {
               return const Home();
             }));
-            AppSettings.openLocationSettings();
+            //AppSettings.openLocationSettings();
           }
 
           if (state is UserSignupErrorState) {
@@ -413,7 +413,7 @@ class _SignupState extends State<Signup> {
                                     image: image.text,
                                   );
                                 }
-                                AppSettings.openLocationSettings();
+                               // AppSettings.openLocationSettings();
                                 //  return Signup2();
                               },
                               child: const Text('Sign up',
