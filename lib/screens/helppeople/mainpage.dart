@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue2/pojo/help_user.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/helppeople/getlocation_service.dart';
 import 'package:rescue2/screens/helppeople/request.dart';
+import 'package:rescue2/pojo/user_data.dart';
+import 'package:rescue2/screens/winchpage/item.dart';
 
 
 import '../navigation_bar.dart';
@@ -58,46 +63,133 @@ class _HelppeopleState extends State<Helppeople> {
                   children: [
                     Image.asset(
                       "assets/images/help.png",
-                      width: 170,
-                      height: 170,
+                      width: 50,
+                      height: 50,
                     ),
                     const SizedBox(height: 40),
                     const Text("Ask for help from people around you",
                       style: TextStyle(fontSize: 18,color:Colors.black ),),
                   ],
                 ),
-                const SizedBox(height: 100),
-
-                Column(
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Mycolor.red,
-                          fixedSize: const Size(250, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                        ),
-                        onPressed: () {
-                         /* LocationService _locationService = LocationService();
+                const SizedBox(height: 10),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Mycolor.red,
+                      fixedSize: const Size(250, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                    ),
+                    onPressed: () {
+                      /* LocationService _locationService = LocationService();
                           _locationService.sendLocationToDataBase(context); */
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return  Request();
-                              }));
-                        },
-                        child: const Text(
-                          'Request',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        )),
-                  ],
+
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return  Request();
+                          }));
+                    },
+                    child: const Text(
+                      'Request',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    )),
+
+                SizedBox(height: 10,),
+
+                Expanded(
+                  child: StreamBuilder<List<HelpUsers>>(
+                    stream: readUsers(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final users = snapshot.data!;
+
+
+
+                        if (users.contains("false")) {
+                          return Text(
+                            "no friends for you",
+                            style: TextStyle(color: Colors.black),
+                          );
+                        } else {
+                          // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                          return ListView(
+                            children: users.map(buildUsers).toList(),
+                          );
+                        }
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          "hasError ${snapshot.error}",
+                          style: TextStyle(color: Colors.black),
+                        );
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
                 ),
+
               ]),
         ),
       ),
     );
+
   }
+
+
+  Stream<List<HelpUsers>> readUsers() =>
+      FirebaseFirestore.instance
+          .collection("help users")
+          .where("user_id", isNotEqualTo: "${FirebaseAuth.instance.currentUser!.uid}")
+          .snapshots().map(
+              (event) => event.docs.map((e) => HelpUsers.fromJson(e.data())).toList());
+
+  Widget buildUsers(HelpUsers userData) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20),
+    child:Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Mycolor.green,
+      ),
+      child: Column(children: [
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            '${userData.problem}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        InkWell(
+          onTap: () {
+
+
+
+          },
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.location} | ${userData.status}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      ],),
+    )
+    /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
+ */ );
+
 }
 

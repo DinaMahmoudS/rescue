@@ -112,8 +112,11 @@ class _PanelWidgetState extends State<PanelWidget> {
                     FirebaseFirestore.instance.collection("help users").add({
                       "user_id": FirebaseAuth.instance.currentUser!.uid,
                       "problem": dropdownitemsvalue,
-                      "location": "Cairo",
+                      "helpFrom":"",
+                      "latitude": "29.961962",
+                      "longitude": "29.961962",
                       "status": "pending",
+                      "color": "red",
                       "other": otherController.text,
 
                     }).whenComplete(() => {
