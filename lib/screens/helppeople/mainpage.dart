@@ -11,6 +11,7 @@ import 'package:rescue2/screens/winchpage/item.dart';
 
 
 import '../navigation_bar.dart';
+import '../user_login/flutter_toast.dart';
 
 class Helppeople extends StatefulWidget {
   const Helppeople({Key? key}) : super(key: key);
@@ -147,37 +148,22 @@ class _HelppeopleState extends State<Helppeople> {
               (event) => event.docs.map((e) => HelpUsers.fromJson(e.data())).toList());
 
   Widget buildUsers(HelpUsers userData) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     child:Container(
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Mycolor.green,
       ),
-      child: Column(children: [
-        Align(
-          alignment: Alignment.center,
-          child: Text(
-            '${userData.problem}',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        InkWell(
-          onTap: () {
-
-
-
-          },
-          child: Align(
+      child: InkWell(
+        onTap: (){
+          showToast2("${userData.user_id}");
+        },
+        child: Column(children: [
+          Align(
             alignment: Alignment.center,
             child: Text(
-              ' ${userData.location} | ${userData.status}',
+              '${userData.problem}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -185,9 +171,69 @@ class _HelppeopleState extends State<Helppeople> {
               ),
             ),
           ),
-        ),
-      ],),
-    )
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.latitude} | ${userData.longitude}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.helpFrom} | ${userData.other}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.check),
+                onPressed: () {
+                  showToast2("accepted");
+
+
+                },
+              ),
+              SizedBox(
+                width: 10,
+              ),
+
+              IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+
+                  })
+
+
+                // FirebaseFirestore.instance.collection("help users").doc().delete();
+
+
+
+
+
+            ],
+          ),
+        ],),
+      ),
+    ),
+
     /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
  */ );
 
