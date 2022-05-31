@@ -2,16 +2,18 @@ class HelpUsers {
   String user_id ;
   String problem ;
   String helpFrom;
-  String location;
   String status;
-  String color;
+  String longitude ;
+  String latitude ;
+  String color ;
   String other;
 
   HelpUsers({
     required this.user_id,
     required this.problem,
     required this.helpFrom,
-    required this.location,
+    required this.latitude,
+    required this.longitude,
     required this.status,
     required this.color,
     required this.other,
@@ -21,7 +23,8 @@ class HelpUsers {
     'user_id': user_id,
     'problem': problem,
     'helpFrom': helpFrom,
-    'location': location,
+    'location': latitude,
+    'location': longitude,
     'status': status,
     'color': color,
     'other': other,
@@ -31,7 +34,8 @@ class HelpUsers {
     user_id: json['user_id'],
     problem: json['problem'],
     helpFrom: json['helpFrom'],
-    location: json['location'],
+    latitude: json['latitude'],
+    longitude: json['longitude'],
     status: json['status'],
     color: json['color'],
     other: json['other'],
