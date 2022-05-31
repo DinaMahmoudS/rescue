@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue2/pojo/help_user.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/helppeople/getlocation_service.dart';
 import 'package:rescue2/screens/helppeople/request.dart';
@@ -82,6 +83,7 @@ class _HelppeopleState extends State<Helppeople> {
                     onPressed: () {
                       /* LocationService _locationService = LocationService();
                           _locationService.sendLocationToDataBase(context); */
+
                       Navigator.push(context, MaterialPageRoute(
                           builder: (BuildContext context) {
                             return  Request();
@@ -94,6 +96,40 @@ class _HelppeopleState extends State<Helppeople> {
                       ),
                     )),
 
+                SizedBox(height: 10,),
+
+                Expanded(
+                  child: StreamBuilder<List<HelpUsers>>(
+                    stream: readUsers(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final users = snapshot.data!;
+
+
+
+                        if (users.contains("false")) {
+                          return Text(
+                            "no friends for you",
+                            style: TextStyle(color: Colors.black),
+                          );
+                        } else {
+                          // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                          return ListView(
+                            children: users.map(buildUsers).toList(),
+                          );
+                        }
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          "hasError ${snapshot.error}",
+                          style: TextStyle(color: Colors.black),
+                        );
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
+                ),
 
               ]),
         ),
@@ -103,17 +139,57 @@ class _HelppeopleState extends State<Helppeople> {
   }
 
 
-  Stream<List<UserData>> readWinshs() =>
+  Stream<List<HelpUsers>> readUsers() =>
       FirebaseFirestore.instance
           .collection("help users")
           .where("user_id", isNotEqualTo: "${FirebaseAuth.instance.currentUser!.uid}")
           .snapshots().map(
-              (event) => event.docs.map((e) => UserData.fromJson(e.data())).toList());
+              (event) => event.docs.map((e) => HelpUsers.fromJson(e.data())).toList());
 
-  Widget buildWinshs(UserData userData) => Padding(
+  Widget buildUsers(HelpUsers userData) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20),
-    child: Item(context,  location: userData.status, phone: userData.name, status: userData.status, name: userData.name, uuid: userData.uId),
-  );
+    child:Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Mycolor.green,
+      ),
+      child: Column(children: [
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            '${userData.problem}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        InkWell(
+          onTap: () {
+
+
+
+          },
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.location} | ${userData.status}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      ],),
+    )
+    /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
+ */ );
 
 }
 
