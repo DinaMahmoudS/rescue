@@ -6,7 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/pojo/help_user.dart';
 import 'package:rescue2/screens/colors.dart';
+import 'package:rescue2/screens/helppeople/InvitationScreen.dart';
 import 'package:rescue2/screens/helppeople/getlocation_service.dart';
+import 'package:rescue2/screens/helppeople/panel_widget.dart';
 import 'package:rescue2/screens/helppeople/request.dart';
 import 'package:rescue2/pojo/user_data.dart';
 import 'package:rescue2/screens/winchpage/item.dart';
@@ -160,6 +162,11 @@ class _HelppeopleState extends State<Helppeople> {
       child: InkWell(
         onTap: (){
           showToast2("${userData.user_id}");
+
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => InvitationScreen(
+                uuid: userData.user_id,
+              )));
         },
         child: Column(children: [
           Align(
