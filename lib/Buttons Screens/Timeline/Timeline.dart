@@ -259,6 +259,36 @@ class _TimelineState extends State<Timeline> {
                         },
                       ),
                     ),
+                    Expanded(
+                      child: StreamBuilder<List<timeline>>(
+                        stream: readTimline("Battery"),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final users = snapshot.data!;
+                            if (users.contains("false")) {
+
+                              return Text(
+                                "no friends for you",
+                                style: TextStyle(color: Colors.black),
+                              );
+                            } else {
+                              // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                              return ListView(
+                                children: users.map(buildTimeLine).toList(),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              "hasError ${snapshot.error}",
+                              style: TextStyle(color: Colors.black),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                    ),
 
                   ],
                 ),

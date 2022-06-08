@@ -29,6 +29,7 @@ Future main() async {
       // Use cubits...
     },
     blocObserver: MyBlocObserver(),
+
   );
   DioHelper.init();
 }
