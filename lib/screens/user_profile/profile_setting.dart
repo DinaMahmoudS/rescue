@@ -2,10 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/user_signup/signup2.dart';
 
 import '../SplashScreen.dart';
-import '../user_signup/signup.dart';
 
 
 class profile extends StatelessWidget {
@@ -46,18 +44,18 @@ class profile extends StatelessWidget {
     child: Column(
     children: <Widget>[
 
-    Container(
-    child:
-    //InputField(),
-    Column(
-    children: <Widget>[
-      Container(
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(color: Color(0xFF59769E),
-                )
-            )
+     /* Container(
+                    child:
+                        //InputField(),
+                        Column(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                            color: Color(0xFF59769E),
+                          ))
         ),
         child: TextField(
           decoration: InputDecoration(
@@ -214,11 +212,11 @@ class profile extends StatelessWidget {
       ),
     ],
     ),
-    ),
+    ),*/
                 const SizedBox(height: 30),
 
 
-                Column(
+      /*  Column(
                   children: [
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -240,9 +238,9 @@ class profile extends StatelessWidget {
                             ))),
                   ],
                 ),
+*/
 
-
-      Column(
+                  Column(
         children: [
           ElevatedButton(
               style: ElevatedButton.styleFrom(
