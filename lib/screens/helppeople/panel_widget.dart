@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
+import 'package:rescue2/screens/helppeople/myhelp.dart';
+import '../../pojo/help_user.dart';
 import '../user_login/flutter_toast.dart';
 import 'chat.dart';
 
@@ -130,42 +132,92 @@ class _PanelWidgetState extends State<PanelWidget> {
                       fontSize: 20,
                     ),
                   )),
+
             ],
           ),
         ),
+        SizedBox(height: 5,),
+        ElevatedButton(onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => HelpFrompeople()));
 
-      /*  Row(
-          children: [
-            Text("Nissan 2018 color:red",
-              style: TextStyle(fontWeight: FontWeight.w600,
-                color: Mycolor.darkblue,
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(width: 60),
-            Icon(
-              Icons.call,
-              size: 30,
-              color: Mycolor.darkblue,
-            ),
-            SizedBox(width: 20),
 
-            IconButton(
-              icon: Image.asset('assets/images/chat.png'),
-              iconSize: 30.0,
-              color: Mycolor.darkblue,
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return  ChatScreen();
-                    }));
-              },
-           ),
+        }, child: Text("My Request"))
 
-          ],
-        ), */
+
+
+
 
       ],
     ),
   );
+
+
+  Stream<List<HelpUsers>> readUsers() =>
+      FirebaseFirestore.instance
+          .collection("help users")
+          .where("user_id", isEqualTo: "${FirebaseAuth.instance.currentUser!.uid}")
+          .snapshots().map(
+              (event) => event.docs.map((e) => HelpUsers.fromJson(e.data())).toList());
+
+  Widget buildUsers(HelpUsers userData) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    child:Container(
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Mycolor.green,
+      ),
+      child: InkWell(
+        onTap: (){
+
+        },
+        child: Column(children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              '${userData.problem}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.latitude} | ${userData.longitude}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.helpFrom} | ${userData.other}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+
+
+        ],),
+      ),
+    ),
+
+    /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
+ */ );
+
 }

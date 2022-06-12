@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
@@ -7,9 +9,10 @@ import 'package:rescue2/screens/navigation_bar.dart';
 
 class Safety extends StatelessWidget {
   const Safety({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    late String phone;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -101,7 +104,13 @@ class Safety extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          _launchURL('tel:+201004371412');
+                          FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).get().then((value) => {
+
+                            phone =  value.get("em_number").toString(),
+
+                          });
+
+                          _launchURL('tel:+${phone}');
                         },
                         child: const Text(
                           'Call Your Chosen Number',
