@@ -161,12 +161,7 @@ class _HelppeopleState extends State<Helppeople> {
       ),
       child: InkWell(
         onTap: (){
-          showToast2("${userData.user_id}");
 
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => InvitationScreen(
-                uuid: userData.user_id,
-              )));
         },
         child: Column(children: [
           Align(
@@ -216,6 +211,12 @@ class _HelppeopleState extends State<Helppeople> {
                 icon: Icon(Icons.check),
                 onPressed: () {
                   showToast2("accepted");
+                  showToast2("${userData.user_id}");
+
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => InvitationScreen(
+                        uuid: userData.user_id,
+                      )));
 
 
                 },
