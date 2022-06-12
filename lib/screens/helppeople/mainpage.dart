@@ -218,10 +218,10 @@ class _HelppeopleState extends State<Helppeople> {
                       showToast2(element.id.toString());
                       FirebaseFirestore.instance.collection("help users").doc(element.id.toString())
                       .update({"helpFrom": "${FirebaseAuth.instance.currentUser!.uid}"}).then((value) => {
-                      Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => InvitationScreen(
-                      uuid: userData.user_id,
-                      ))),
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => InvitationScreen(
+                              uuid: userData.user_id,
+                            ))),
 
                       });
                     })

@@ -56,10 +56,10 @@ Widget Item(BuildContext context ,
                         ),
                         InkWell(
                           onTap: () {
-                            if(status == "off"){
-                              showToast2("This person is offline");
+                            if(status == "OFF"){
+                              showToast2("This person is help another person");
                             }else {
-                              FirebaseFirestore.instance.collection("requset winsh").add({
+                              FirebaseFirestore.instance.collection("requset winsh").doc(FirebaseAuth.instance.currentUser!.uid).set({
                                 "name": name,
                                 "phone": phone,
                                 "uuid": uuid,
