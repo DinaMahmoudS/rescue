@@ -17,14 +17,14 @@ import 'package:rescue2/screens/winchpage/item.dart';
 import '../navigation_bar.dart';
 import '../user_login/flutter_toast.dart';
 
-class Helppeople extends StatefulWidget {
-  const Helppeople({Key? key}) : super(key: key);
+class HelpFrompeople extends StatefulWidget {
+  const HelpFrompeople({Key? key}) : super(key: key);
 //help people
   @override
-  State<Helppeople> createState() => _HelppeopleState();
+  State<HelpFrompeople> createState() => _HelpFrompeopleState();
 }
 
-class _HelppeopleState extends State<Helppeople> {
+class _HelpFrompeopleState extends State<HelpFrompeople> {
   //FirebaseService _service = FireBaseService();
   double _latitude = 0;
   double _longitude = 0;
@@ -42,7 +42,7 @@ class _HelppeopleState extends State<Helppeople> {
                   bottomLeft: Radius.circular(30))),
 
           title: const Text(
-            "Help From People",
+            "History",
             style: TextStyle(fontSize: 23),
           ),
           centerTitle: true,
@@ -72,34 +72,12 @@ class _HelppeopleState extends State<Helppeople> {
                       height: 50,
                     ),
                     const SizedBox(height: 40),
-                    const Text("Ask for help from people around you",
+                    const Text("your order",
                       style: TextStyle(fontSize: 18,color:Colors.black ),),
                   ],
                 ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Mycolor.red,
-                      fixedSize: const Size(250, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                    ),
-                    onPressed: () {
-                      /* LocationService _locationService = LocationService();
-                          _locationService.sendLocationToDataBase(context); */
 
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return  Request();
-                          }));
-                    },
-                    child: const Text(
-                      'Request',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    )),
+
 
                 SizedBox(height: 10,),
 
@@ -147,7 +125,7 @@ class _HelppeopleState extends State<Helppeople> {
   Stream<List<HelpUsers>> readUsers() =>
       FirebaseFirestore.instance
           .collection("help users")
-          .where("user_id", isNotEqualTo: "${FirebaseAuth.instance.currentUser!.uid}")
+          .where("user_id", isEqualTo: "${FirebaseAuth.instance.currentUser!.uid}")
           .snapshots().map(
               (event) => event.docs.map((e) => HelpUsers.fromJson(e.data())).toList());
 
@@ -203,62 +181,12 @@ class _HelppeopleState extends State<Helppeople> {
 
           ),
 
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.check),
-                onPressed: () {
-                  showToast2("accepted");
-                  showToast2("${userData.user_id}");
-                  FirebaseFirestore.instance.collection("help users").where("user_id",isEqualTo: userData.user_id)
-                  .get().then((value) => {
-                    value.docs.forEach((element) {
-                      showToast2(element.id.toString());
-                      FirebaseFirestore.instance.collection("help users").doc(element.id.toString())
-                      .update({"helpFrom": "${FirebaseAuth.instance.currentUser!.uid}"}).then((value) => {
-                      Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => InvitationScreen(
-                      uuid: userData.user_id,
-                      ))),
 
-                      });
-                    })
-                  });
-
-                  }),
-
-                 
-
-
-
-              SizedBox(
-                width: 10,
-              ),
-
-              IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: () {
-                  FileSystemEvent.delete;
-//return dispose();
-                  })
-
-
-                // FirebaseFirestore.instance.collection("help users").doc().delete();
-
-
-
-
-
-            ],
-          ),
         ],),
       ),
     ),
 
-    /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
- */ );
+   );
 
 }
 

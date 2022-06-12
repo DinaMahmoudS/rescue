@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
@@ -30,6 +31,19 @@ class MapWidgetState extends State<MapWidget> {
 
   }
 
+  _getMyLocation() async {
+    String id = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      final loc.LocationData _locationResult = await location.getLocation();
+      await FirebaseFirestore.instance.collection('maps').doc(id).set({
+        'latitude': "${_locationResult.latitude}",
+        'longitude': "${_locationResult.longitude}",
+        'id': '${id}'
+      }, SetOptions(merge: true));
+    } catch (e) {
+      print(e);
+    }
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -39,6 +53,7 @@ class MapWidgetState extends State<MapWidget> {
         interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
     _getLocation();
+    _getMyLocation();
 
   }
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:rescue2/pojo/Map.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InvitationScreen extends StatefulWidget {
   String uuid;
@@ -18,6 +19,7 @@ class InvitationScreen extends StatefulWidget {
 class _InvitationScreenState extends State<InvitationScreen> {
   final loc.Location location = loc.Location();
   Completer<GoogleMapController> _controller = Completer();
+  late String name = "",phone ="", car="";
 
 
   @override
@@ -98,7 +100,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
   }
 
   Future<Google_Map?> readUser() async {
-    final me = FirebaseFirestore.instance.collection("maps").doc("${FirebaseAuth.instance.currentUser!.uid}");
+    final me = FirebaseFirestore.instance.collection("maps").doc("${widget.uuid}");
     final snapshot = await me.get();
     if (snapshot.exists) {
       return Google_Map.fromJson(snapshot.data()!);
@@ -137,18 +139,30 @@ class _InvitationScreenState extends State<InvitationScreen> {
     }
   }
 
-  Set<Marker> _createMarker(String LatLn, Lat)  {
+  Set<Marker> _createMarker(String LatLn, Lat) {
+  FirebaseFirestore.instance.collection("users").doc(widget.uuid).get().then((value) => {
+    name =  value.get("name").toString(),
+    phone =  value.get("number").toString(),
+    car =  value.get("car_model").toString(),
+  });
     return {
       Marker(
         markerId: MarkerId("marker_1"),
         position: LatLng(double.parse(LatLn), double.parse(Lat)),
         infoWindow: InfoWindow(
-            title: '${widget.uuid}',
-            snippet: "${LatLn + "LatLn " + " LatLn " + LatLn}"),
+            title: '${name}',
+            onTap: (){
+              _launchURL("tel:+${phone}");
+            },
+            snippet: "phone ${phone} car model ${car}"),
       ),
 
 
     };
+  }
+
+  void _launchURL(String _url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
   }
 
 }
