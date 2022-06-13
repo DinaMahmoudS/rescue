@@ -85,12 +85,12 @@ class _TimelineState extends State<Timeline> {
                     IconButton(
                       icon: Icon(Icons.info_outline_rounded),
                       onPressed: () {
-                        showModalBottomSheet(
+                       /* showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
-                            return ButtomSheatHelper();
+                            return ButtomSheatHelper(name: '', phone: '',);
                           },
-                        );
+                        );*/
                       },
                     ),
                   ],

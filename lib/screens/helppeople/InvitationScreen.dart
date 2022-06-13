@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:rescue2/pojo/Map.dart';
+import 'package:rescue2/screens/chat.dart';
+import 'package:rescue2/screens/helppeople/chat.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../ButtomSheatHelper.dart';
 
 class InvitationScreen extends StatefulWidget {
   String uuid;
@@ -150,9 +154,15 @@ class _InvitationScreenState extends State<InvitationScreen> {
         markerId: MarkerId("marker_1"),
         position: LatLng(double.parse(LatLn), double.parse(Lat)),
         infoWindow: InfoWindow(
-            title: '${name}',
+            title: 'name : ${name}',
             onTap: (){
-              _launchURL("tel:+${phone}");
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return ButtomSheatHelper(name: '${name}', phone: '${phone}', carModel: '${car}' ,);
+                },
+              );
+            // _showMyDialog(context, phone, name);
             },
             snippet: "phone ${phone} car model ${car}"),
       ),
@@ -160,6 +170,46 @@ class _InvitationScreenState extends State<InvitationScreen> {
 
     };
   }
+
+  Future<void> _showMyDialog(BuildContext context, String phone, String name) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Align(
+              alignment: Alignment.topRight,
+              child:  Text("${name}",style: TextStyle(color: Colors.black,fontSize:18,fontWeight: FontWeight.w700,),)),
+          content: SingleChildScrollView(
+            child: Column(
+              //crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+
+                Text(name,style: TextStyle(color: Colors.black,fontSize:16,fontWeight: FontWeight.w700),),
+                Text(phone,style: TextStyle(color: Colors.black,fontSize:16,fontWeight: FontWeight.w700),),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Call'),
+              onPressed: () {
+                _launchURL("tel:+${phone}");
+              },
+            ),
+            TextButton(
+              child: const Text('Chat'),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => ChatScreen()));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   void _launchURL(String _url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';

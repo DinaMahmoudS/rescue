@@ -1,9 +1,15 @@
 import 'dart:developer';
 
+import 'package:dialogflow_grpc/dialogflow_grpc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'helppeople/chat.dart';
 
 class ButtomSheatHelper extends StatefulWidget {
-  const ButtomSheatHelper({Key? key}) : super(key: key);
+  String name , phone , carModel ;
+   ButtomSheatHelper({Key? key , required this.name , required this.phone , required this.carModel}) : super(key: key);
 
   @override
   _ButtomSheatHelperState createState() => _ButtomSheatHelperState();
@@ -22,7 +28,7 @@ class _ButtomSheatHelperState extends State<ButtomSheatHelper> {
                 Padding(
                   padding: const EdgeInsets.only(left: 120),
                   child: Text(
-                    "Reminder!",
+                    "${widget.name}",
                     style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -42,10 +48,30 @@ class _ButtomSheatHelperState extends State<ButtomSheatHelper> {
             ),
             SizedBox(height: 100),
             Text(
-              "Don't forget to get your maintenance done on time",
+              "name = ${widget.name} \n phone =${widget.phone} \n car model= ${widget.carModel}",
               style: TextStyle(color: Colors.black),
-            )
+            ),
+
+            SizedBox(height: 10,),
+
+            Row(children: [
+              IconButton(onPressed: (){
+
+                _launchURL("tel:${widget.phone}");
+              }, icon: Icon(Icons.phone)),
+              SizedBox(width: 10,),
+
+              IconButton(onPressed: (){
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => ChatScreen()));
+              }, icon: Icon(Icons.chat)),
+
+            ],)
+
           ],
         ));
+  }
+  void _launchURL(String _url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
   }
 }
