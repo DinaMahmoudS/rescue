@@ -64,7 +64,6 @@ class _ButtomSheatHelperState extends State<ButtomSheatHelper> {
               IconButton(onPressed: (){
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => ChatScreen()));
-                _launchURL("tel:${widget.phone}");
               }, icon: Icon(Icons.chat)),
 
             ],)
