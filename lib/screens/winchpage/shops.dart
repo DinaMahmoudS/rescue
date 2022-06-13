@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue2/pojo/driverdetails.dart';
 import 'package:rescue2/pojo/winsh_data.dart';
 import 'package:rescue2/screens/winchpage/item.dart';
 
@@ -36,7 +37,7 @@ class _ShopsState extends State<Shops> {
         width: double.infinity,
         height: double.infinity,
         child: Expanded(
-          child: StreamBuilder<List<Winshs>>(
+          child: StreamBuilder<List<DriverDetails>>(
             stream: readWinshs(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -71,12 +72,12 @@ class _ShopsState extends State<Shops> {
     );
   }
 
-  Stream<List<Winshs>> readWinshs() =>
-      FirebaseFirestore.instance.collection("winshs").snapshots().map(
-          (event) => event.docs.map((e) => Winshs.fromJson(e.data())).toList());
+  Stream<List<DriverDetails>> readWinshs() =>
+      FirebaseFirestore.instance.collection("driver details").snapshots().map(
+          (event) => event.docs.map((e) => DriverDetails.fromJson(e.data())).toList());
 
-  Widget buildWinshs(Winshs winshs) => Padding(
+  Widget buildWinshs(DriverDetails winshs) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Item(context,  location: winshs.location, phone: winshs.phone, status: winshs.status, name: winshs.name, uuid: winshs.uuid,),
+        child: Item(context,  location: winshs.comuID, phone: winshs.phone, status: winshs.status, name: winshs.name, uuid: winshs.uId,),
       );
 }
