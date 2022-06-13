@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import'package:flutter/material.dart';
+import 'package:rescue2/pojo/trafc.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/navigation_bar.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
@@ -56,31 +57,31 @@ class _ReportState extends State<Report> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 5),
                     Image.asset(
                       "assets/images/traffic.png",
-                      width: 170,
-                      height: 170,
+                      width: 50,
+                      height: 50,
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 5),
                     TextFormField(
                       controller: _locationCon,
                       decoration: InputDecoration(
                           labelText: "Location",
                           labelStyle: TextStyle(
-                              fontSize: 25,
+                              fontSize: 20,
                               color: Mycolor.darkblue,
                               fontWeight: FontWeight.bold),
                           fillColor: Colors.black12,
                           filled: true,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(10)),
                           hintText:
                               'region,main street name,branch street name',
                           suffixIcon: Icon(Icons.send)
                ),
              ),
-             SizedBox(height: 30),
+             SizedBox(height: 5),
                 TextFormField(
                   controller: causesCon,
                       decoration: InputDecoration(
@@ -92,13 +93,13 @@ class _ReportState extends State<Report> {
                           fillColor: Colors.black12,
                           filled: true,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           hintText:'ex accident',
                    suffixIcon: Icon(Icons.send)
           ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 5),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Mycolor.red,
@@ -133,6 +134,41 @@ class _ReportState extends State<Report> {
                             fontSize: 20,
                           ),
                         )),
+
+                    Expanded(
+                      child: StreamBuilder<List<Traffic>>(
+                        stream: readUsers(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final users = snapshot.data!;
+
+
+
+                            if (users.contains("false")) {
+                              return Text(
+                                "no friends for you",
+                                style: TextStyle(color: Colors.black),
+                              );
+                            } else {
+                              // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                              return ListView(
+                                children: users.map(buildUsers).toList(),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              "hasError ${snapshot.error}",
+                              style: TextStyle(color: Colors.black),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                    ),
+
+
            ],
          ),
        ),
@@ -142,5 +178,60 @@ class _ReportState extends State<Report> {
       ),
     );
   }
+
+  Stream<List<Traffic>> readUsers() =>
+      FirebaseFirestore.instance
+          .collection("traffic")
+          .snapshots().map(
+              (event) => event.docs.map((e) => Traffic.fromJson(e.data())).toList());
+
+  Widget buildUsers(Traffic userData) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    child:Container(
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Mycolor.green,
+      ),
+      child: InkWell(
+        onTap: (){
+
+        },
+        child: Column(children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              '${userData.uuid}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.causes} | ${userData.location}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+
+
+
+        ],),
+      ),
+    ),
+
+    /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
+ */ );
 }
 
