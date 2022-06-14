@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import'package:flutter/material.dart';
@@ -5,6 +7,10 @@ import 'package:rescue2/pojo/trafc.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/navigation_bar.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
+
+import '../pojo/help_user.dart';
+import 'helppeople/InvitationScreen.dart';
+import 'helppeople/request.dart';
 
 class Report extends StatefulWidget {
   const Report({Key? key}) : super(key: key);
@@ -21,40 +27,267 @@ class _ReportState extends State<Report> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Container(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Mycolor.darkblue,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30),
+                  bottomLeft: Radius.circular(30))),
+
+          title: const Text(
+            "Help From People",
+            style: TextStyle(fontSize: 23),
+          ),
+          centerTitle: true,
+
+          leading:
+          IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return const Home();
+                    }));
+              }),
+        ),
+
+        body: Container(
+          alignment: Alignment.center,
+          color: Mycolor.white,
+          child: Column(
+              children: <Widget>[
+                const SizedBox(height: 50),
+                Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/help.png",
+                      width: 50,
+                      height: 50,
+                    ),
+                    const SizedBox(height: 5),
+                    TextFormField(
+                            controller: _locationCon,
+                            decoration: InputDecoration(
+                                labelText: "Location",
+                                labelStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: Mycolor.darkblue,
+                                    fontWeight: FontWeight.bold),
+                                fillColor: Colors.black12,
+                                filled: true,
+                                border: OutlineInputBorder(
+
+                                borderRadius: BorderRadius.circular(10)),
+                            hintText:
+                            'region,main street name,branch street name',
+                            suffixIcon: Icon(Icons.send)
+                        ),
+                      ),
+                    TextFormField(
+                      controller: _locationCon,
+                      decoration: InputDecoration(
+                          labelText: "Location",
+                          labelStyle: TextStyle(
+                              fontSize: 20,
+                              color: Mycolor.darkblue,
+                              fontWeight: FontWeight.bold),
+                          fillColor: Colors.black12,
+                          filled: true,
+                          border: OutlineInputBorder(
+
+                              borderRadius: BorderRadius.circular(10)),
+                          hintText:
+                          'region,main street name,branch street name',
+                          suffixIcon: Icon(Icons.send)
+                      ),
+                    ),
+                     ],
+                ),
+                const SizedBox(height: 5),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Mycolor.red,
+                      fixedSize: const Size(150, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                    ),
+                    onPressed: () {
+                      /* LocationService _locationService = LocationService();
+                          _locationService.sendLocationToDataBase(context); */
+
+
+
+                    },
+                    child: const Text(
+                      'Send',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    )),
+
+                SizedBox(height: 5,),
+
+                Expanded(
+                  child: StreamBuilder<List<HelpUsers>>(
+                    stream: readUsers(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final users = snapshot.data!;
+
+
+
+                        if (users.contains("false")) {
+                          return Text(
+                            "no friends for you",
+                            style: TextStyle(color: Colors.black),
+                          );
+                        } else {
+                          // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                          return ListView(
+                            children: users.map(buildUsers).toList(),
+                          );
+                        }
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          "hasError ${snapshot.error}",
+                          style: TextStyle(color: Colors.black),
+                        );
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
+                ),
+
+              ]),
+        ),
+      ),
+    );
+  }
+
+
+  Stream<List<HelpUsers>> readUsers() =>
+      FirebaseFirestore.instance
+          .collection("help users")
+          .where("user_id", isNotEqualTo: "${FirebaseAuth.instance.currentUser!.uid}")
+          .snapshots().map(
+              (event) => event.docs.map((e) => HelpUsers.fromJson(e.data())).toList());
+
+  Widget buildUsers(HelpUsers userData) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    child:Container(
+
       decoration: BoxDecoration(
-      color: Mycolor.white,
-    ),
-    child: Scaffold(
-    appBar:AppBar(
-    backgroundColor: Mycolor.darkblue,
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.only(
-    bottomRight: Radius.circular(30),
-    bottomLeft: Radius.circular(30))),
+        borderRadius: BorderRadius.circular(20),
+        color: Mycolor.green,
+      ),
+      child: InkWell(
+        onTap: (){
 
-    // actions: const [ Icon(Icons.chat_outlined )],
-    title: const Text(
-    "Report For Traffic",
-    style: TextStyle(fontSize: 25),
-    ),
-    centerTitle: true,
-    leading:
-    //This is the arrow icon
-    IconButton(
-    icon: Icon(Icons.arrow_back_ios),
-    onPressed: () {
-    Navigator.push(context,
-    MaterialPageRoute(builder: (BuildContext context) {
-    return Home();
-    }));
-    }),
+        },
+        child: Column(children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              '${userData.problem}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.latitude} | ${userData.longitude}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.helpFrom} | ${userData.other}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                  icon: Icon(Icons.check),
+                  onPressed: () {
+                    showToast2("accepted");
+                    showToast2("${userData.user_id}");
+                    FirebaseFirestore.instance.collection("help users").where("user_id",isEqualTo: userData.user_id)
+                        .get().then((value) => {
+                      value.docs.forEach((element) {
+                        showToast2(element.id.toString());
+                        FirebaseFirestore.instance.collection("help users").doc(element.id.toString())
+                            .update({"helpFrom": "${FirebaseAuth.instance.currentUser!.uid}"}).then((value) => {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => InvitationScreen(
+                                uuid: userData.user_id,
+                              ))),
+
+                        });
+                      })
+                    });
+
+                  }),
+
+
+
+
+
+              SizedBox(
+                width: 10,
+              ),
+
+              IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    FileSystemEvent.delete;
+//return dispose();
+                  })
+
+
+              // FirebaseFirestore.instance.collection("help users").doc().delete();
+
+
+
+
+
+            ],
+          ),
+        ],),
+      ),
     ),
 
-      body:Padding(
-        padding:const EdgeInsets.all(11.0),
-        child:Form(
-              child: SingleChildScrollView(
+    /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
+ */ );
+
+//
+  /*
+  * SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     const SizedBox(height: 5),
@@ -171,14 +404,36 @@ class _ReportState extends State<Report> {
 
            ],
          ),
-       ),
-    ),
-    ),
-    ),
-      ),
-    );
-  }
+       ),*/
 
+  /*StreamBuilder<List<Traffic>>(
+                    stream: readUsers(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final users = snapshot.data!;
+                        if (users.contains("false")) {
+                          return Text(
+                            "no friends for you",
+                            style: TextStyle(color: Colors.black),
+                          );
+                        } else {
+                          // return Text("no friends you" , style: TextStyle(color: Colors.white),);
+                          return ListView(
+                            children: users.map(buildUsers).toList(),
+                          );
+                        }
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          "hasError ${snapshot.error}",
+                          style: TextStyle(color: Colors.black),
+                        );
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),*/
+  /*
   Stream<List<Traffic>> readUsers() =>
       FirebaseFirestore.instance
           .collection("traffic")
@@ -229,9 +484,8 @@ class _ReportState extends State<Report> {
 
         ],),
       ),
-    ),
+    ));
+*/
 
-    /* Item(context,  location: userData.location, phone: userData.problem, status: userData.status, name: userData.color, uuid: userData.user_id),
- */ );
 }
 
