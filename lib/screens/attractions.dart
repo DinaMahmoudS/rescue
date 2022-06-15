@@ -17,15 +17,13 @@ class _AttractionState extends State<Attraction> {
   String _value = "1";
   String _value2 = "1";
 
-  String dropdownvalue = 'fresh';
+  String dropdownvalue = 'Change Battery';
   String dropdownitemsvalue = 'KIA';
   List dataList = [];
   var services = [
-    'fresh',
-    'hot',
-    'ice',
-    'smoke',
-    'sweet',
+    'Change Battery',
+    'Tow',
+    'Quick Service',
   ];
   var carModel = [
     "KIA",

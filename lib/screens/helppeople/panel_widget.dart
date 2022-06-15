@@ -23,15 +23,14 @@ class _PanelWidgetState extends State<PanelWidget> {
 
 
   String? _value = "1";
-  String dropdownitemsvalue = 'KIA';
+  String dropdownitemsvalue = 'Flat tire';
   late var otherController = TextEditingController() ;
 
-  var carModel = [
-    "KIA",
-    "Nissan",
-    "Toyota",
-    "BMW",
-    "Mercedes",
+  var services = [
+    "Flat tire",
+    "Change Battery",
+    "Tow",
+    "Fill with gasoline",
   ];
 
   @override
@@ -66,7 +65,7 @@ class _PanelWidgetState extends State<PanelWidget> {
             child:DropdownButton(
               dropdownColor: Mycolor.Beige,
               value: dropdownitemsvalue,
-              items: carModel.map((String items) {
+              items: services.map((String items) {
                 return DropdownMenuItem(
                   value: items,
                   child: Text(items),
@@ -132,22 +131,26 @@ class _PanelWidgetState extends State<PanelWidget> {
                       fontSize: 20,
                     ),
                   )),
+              SizedBox(height: 10,),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Mycolor.red,
+                    fixedSize: const Size(250, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                  ),
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => HelpFrompeople()));
 
+
+                  }, child: Text("My Request", style: TextStyle(
+                fontSize: 20,
+              ),))
             ],
           ),
         ),
-        SizedBox(height: 5,),
-        ElevatedButton(onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => HelpFrompeople()));
-
-
-        }, child: Text("My Request"))
-
-
-
-
-
       ],
     ),
   );

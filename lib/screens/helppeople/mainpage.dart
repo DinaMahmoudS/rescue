@@ -169,7 +169,7 @@ class _HelppeopleState extends State<Helppeople> {
             child: Text(
               '${userData.problem}',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.blue,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
@@ -183,7 +183,7 @@ class _HelppeopleState extends State<Helppeople> {
             child: Text(
               ' ${userData.latitude} | ${userData.longitude}',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.blue,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
@@ -195,7 +195,7 @@ class _HelppeopleState extends State<Helppeople> {
             child: Text(
               ' ${userData.helpFrom} | ${userData.other}',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.blue,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
