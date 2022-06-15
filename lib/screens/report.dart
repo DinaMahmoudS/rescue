@@ -136,6 +136,7 @@ class _ReportState extends State<Report> {
                           'uuid': '${name}',
                         }).whenComplete(() =>
                         {
+
                           showToast2("Report sent successfully"),
                         });
                       }
