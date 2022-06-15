@@ -23,6 +23,17 @@ class _ReportState extends State<Report> {
 
   late var _locationCon = TextEditingController();
   late var causesCon = TextEditingController();
+  late String name;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid)
+    .get().then((value) => {
+      name = value.get("name");
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -122,7 +133,7 @@ class _ReportState extends State<Report> {
                         FirebaseFirestore.instance.collection('traffic').add({
                           'location': _locationCon.text,
                           'causes': causesCon.text,
-                          'uuid': '${FirebaseAuth.instance.currentUser!.uid}',
+                          'uuid': '${name}',
                         }).whenComplete(() =>
                         {
                           showToast2("Report sent successfully"),
