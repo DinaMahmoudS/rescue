@@ -85,9 +85,9 @@ class _ReportState extends State<Report> {
                         ),
                       ),
                     TextFormField(
-                      controller: _locationCon,
+                      controller: causesCon,
                       decoration: InputDecoration(
-                          labelText: "Location",
+                          labelText: "Causes",
                           labelStyle: TextStyle(
                               fontSize: 20,
                               color: Mycolor.darkblue,
@@ -98,7 +98,7 @@ class _ReportState extends State<Report> {
 
                               borderRadius: BorderRadius.circular(10)),
                           hintText:
-                          'region,main street name,branch street name',
+                          'Causes',
                           suffixIcon: Icon(Icons.send)
                       ),
                     ),
@@ -114,11 +114,20 @@ class _ReportState extends State<Report> {
                       ),
                     ),
                     onPressed: () {
-                      /* LocationService _locationService = LocationService();
-                          _locationService.sendLocationToDataBase(context); */
-
-
-
+                      if (_locationCon.text.isEmpty) {
+                        showToast2("Please enter your location");
+                      } else if (causesCon.text.isEmpty) {
+                        showToast2("Please enter your causes");
+                      } else {
+                        FirebaseFirestore.instance.collection('traffic').add({
+                          'location': _locationCon.text,
+                          'causes': causesCon.text,
+                          'uuid': '${FirebaseAuth.instance.currentUser!.uid}',
+                        }).whenComplete(() =>
+                        {
+                          showToast2("Report sent successfully"),
+                        });
+                      }
                     },
                     child: const Text(
                       'Send',
@@ -130,14 +139,11 @@ class _ReportState extends State<Report> {
                 SizedBox(height: 5,),
 
                 Expanded(
-                  child: StreamBuilder<List<HelpUsers>>(
+                  child: StreamBuilder<List<Traffic>>(
                     stream: readUsers(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         final users = snapshot.data!;
-
-
-
                         if (users.contains("false")) {
                           return Text(
                             "no friends for you",
@@ -169,14 +175,13 @@ class _ReportState extends State<Report> {
   }
 
 
-  Stream<List<HelpUsers>> readUsers() =>
+  Stream<List<Traffic>> readUsers() =>
       FirebaseFirestore.instance
-          .collection("help users")
-          .where("user_id", isNotEqualTo: "${FirebaseAuth.instance.currentUser!.uid}")
+          .collection("traffic")
           .snapshots().map(
-              (event) => event.docs.map((e) => HelpUsers.fromJson(e.data())).toList());
+              (event) => event.docs.map((e) => Traffic.fromJson(e.data())).toList());
 
-  Widget buildUsers(HelpUsers userData) => Padding(
+  Widget buildUsers(Traffic userData) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     child:Container(
 
@@ -192,7 +197,7 @@ class _ReportState extends State<Report> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              '${userData.problem}',
+              '${userData.uuid}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -206,7 +211,7 @@ class _ReportState extends State<Report> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              ' ${userData.latitude} | ${userData.longitude}',
+              ' ${userData.causes} | ${userData.location}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -214,69 +219,6 @@ class _ReportState extends State<Report> {
               ),
             ),
 
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              ' ${userData.helpFrom} | ${userData.other}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-
-          ),
-
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                  icon: Icon(Icons.check),
-                  onPressed: () {
-                    showToast2("accepted");
-                    showToast2("${userData.user_id}");
-                    FirebaseFirestore.instance.collection("help users").where("user_id",isEqualTo: userData.user_id)
-                        .get().then((value) => {
-                      value.docs.forEach((element) {
-                        showToast2(element.id.toString());
-                        FirebaseFirestore.instance.collection("help users").doc(element.id.toString())
-                            .update({"helpFrom": "${FirebaseAuth.instance.currentUser!.uid}"}).then((value) => {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => InvitationScreen(
-                                uuid: userData.user_id,
-                              ))),
-
-                        });
-                      })
-                    });
-
-                  }),
-
-
-
-
-
-              SizedBox(
-                width: 10,
-              ),
-
-              IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {
-                    FileSystemEvent.delete;
-//return dispose();
-                  })
-
-
-              // FirebaseFirestore.instance.collection("help users").doc().delete();
-
-
-
-
-
-            ],
           ),
         ],),
       ),
