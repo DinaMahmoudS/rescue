@@ -31,7 +31,7 @@ class _ReportState extends State<Report> {
     super.initState();
     FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid)
     .get().then((value) => {
-      name = value.get("name");
+      name = value.get("name")
     });
   }
   @override
