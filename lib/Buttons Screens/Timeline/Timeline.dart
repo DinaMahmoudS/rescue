@@ -71,30 +71,15 @@ class _TimelineState extends State<Timeline> {
 //Action is used to put the items on the right side on the app bar but in this case the icon
 
               actions: [
-                Row(
-                  children: [
-                    //Padding is used here to adjust the place of the icon below
+
                     Padding(
-                        padding: EdgeInsets.only(right: 40),
+                        padding: EdgeInsets.only(right: 80),
 //This the icon
                         child: Container(
                             height: 30,
                             width: 30,
                             child:
                             Image.asset("assets/images/timeline (1).png"))),
-                    IconButton(
-                      icon: Icon(Icons.info_outline_rounded),
-                      onPressed: () {
-                       /* showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ButtomSheatHelper(name: '', phone: '',);
-                          },
-                        );*/
-                      },
-                    ),
-                  ],
-                ),
               ],
             ),
             body: Center(

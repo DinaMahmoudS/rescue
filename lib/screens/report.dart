@@ -44,9 +44,9 @@ class _ReportState extends State<Report> {
     IconButton(
     icon: Icon(Icons.arrow_back_ios),
     onPressed: () {
-    Navigator.push(context,
-    MaterialPageRoute(builder: (BuildContext context) {
-    return Home();
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return Home();
     }));
     }),
     ),
