@@ -9,15 +9,15 @@ class Google_Map {
     required this.longitude,
   });
 
-  Map<String, dynamic> toJson()=>{
-    'id': id,
-    'latitude': latitude ,
-    'longitude': longitude,
-  };
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'latitude': latitude,
+        'longitude': longitude,
+      };
 
   static Google_Map fromJson(Map<String, dynamic> json) => Google_Map(
-    id: json['id'],
-    longitude: json['longitude'],
-    latitude: json['latitude'],
-  );
+        id: json['id'],
+        longitude: json['longitude'],
+        latitude: json['latitude'],
+      );
 }

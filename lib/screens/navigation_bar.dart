@@ -7,8 +7,6 @@ import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/home2.dart';
 import 'package:rescue2/screens/user_profile/profile_setting.dart';
 
-
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -22,7 +20,9 @@ class _HomeState extends State<Home> {
     const Home2(),
     const Safety(),
     Mapscreens(),
-    MyHomePage(title: 'Chatbot-Helper',),
+    MyHomePage(
+      title: 'Chatbot-Helper',
+    ),
     const profile(),
   ];
 
@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
         AssetImage("assets/images/placeholder.png"),
         size: 30.0,
       ),
-       const ImageIcon(
+      const ImageIcon(
         AssetImage("assets/images/chat.png"),
         size: 30.0,
       ),

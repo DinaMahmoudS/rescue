@@ -1,13 +1,11 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/Buttons Screens/Main Screen/Main Screen.dart';
-import 'package:rescue2/main.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
 
 class Milage extends StatefulWidget {
@@ -19,6 +17,7 @@ class Milage extends StatefulWidget {
 
 class _MilageState extends State<Milage> {
   final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,15 +56,15 @@ class _MilageState extends State<Milage> {
             centerTitle: true,
 //Leading is used to put the items on the left side on the app bar but in this case the icon
             leading:
-            //This is the arrow icon
-            IconButton(
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
+                //This is the arrow icon
+                IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
                         return Main_Screen();
                       }));
-                }),
+                    }),
 //Action is used to put the items on the right side on the app bar but in this case the icon
             actions: [
 //Padding is used here to adjust the place of the icon below
@@ -86,7 +85,8 @@ class _MilageState extends State<Milage> {
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   child: Container(
                     height: 70,
-                    child: TextField(controller: controller,
+                    child: TextField(
+                      controller: controller,
                       decoration: InputDecoration(
                         hoverColor: Colors.white,
                         hintText: "Current milage",
@@ -113,18 +113,20 @@ class _MilageState extends State<Milage> {
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
                           final milage = controller.text;
-                          createData(coll: 'Maintenance',data: milage,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Milage');
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return Main_Screen();
-                              }));
+                          createData(
+                              coll: 'Maintenance',
+                              data: milage,
+                              doc: FirebaseAuth.instance.currentUser!.uid,
+                              coll2: 'Milage');
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return Main_Screen();
+                          }));
                         },
-                        child: Text("Done"))
-                ),
+                        child: Text("Done"))),
               ]),
         ),
       ),
     );
   }
-
 }

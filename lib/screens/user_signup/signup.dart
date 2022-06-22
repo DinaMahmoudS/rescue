@@ -8,17 +8,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rescue2/network/remote/Storage_Service.dart';
-
-//import 'package:rescue2/screens/Home.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/user_signup/cubit.dart';
 import 'package:rescue2/screens/user_signup/common_photo_register.dart';
 import 'package:rescue2/screens/user_signup/states.dart';
-import 'package:app_settings/app_settings.dart';
 import '../navigation_bar.dart';
-import '../user_login/login.dart';
 import 'package:flutter/rendering.dart';
-import 'package:rescue2/screens/user_login/flutter_toast.dart';
 
 class Signup extends StatefulWidget {
   Signup({Key? key}) : super(key: key);
@@ -46,29 +41,6 @@ class _SignupState extends State<Signup> {
 
   final formKey = GlobalKey<FormState>();
 
-  //File? image;
-
-/*
-  Future<Uri> pickImage() async {
-    FirebaseStorage _storage = FirebaseStorage.instance;
-
-    //Get the file from the image picker and store it
-    File image = (await ImagePicker.pickImage(source: ImageSource.gallery)) as File;
-
-    //Create a reference to the location you want to upload to in firebase
-    StorageReference reference = _storage.ref().child("images/");
-
-    //Upload the file to firebase
-    StorageUploadTask uploadTask = reference.putFile(file);
-
-    // Waits till the file is uploaded then stores the download url
-    Uri location = (await uploadTask.future).downloadUrl;
-
-    //returns the download url
-    return location;
-  }
-*/
-
   Future chooseFile() async {
     try {
       await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
@@ -77,7 +49,7 @@ class _SignupState extends State<Signup> {
         });
       });
     } on PlatformException catch (e) {
-      print('falid to pick');
+      print('faild to pick');
     }
   }
 
@@ -112,7 +84,6 @@ class _SignupState extends State<Signup> {
                 MaterialPageRoute(builder: (BuildContext context) {
               return const Home();
             }));
-            //AppSettings.openLocationSettings();
           }
 
           if (state is UserSignupErrorState) {
@@ -356,9 +327,10 @@ class _SignupState extends State<Signup> {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(15),
+                                  width: 270,
                                   child: buildButton(
-                                    title: 'Commercial Registration photo',
+                                    title: 'Driving license photo',
                                     icon: Icons.image_outlined,
                                     prefixIcon: Mycolor.teal,
                                     onClicked: () async {
@@ -378,8 +350,11 @@ class _SignupState extends State<Signup> {
                                         return null;
                                       }
                                       final path = results.files.single.path!;
-                                      final fileName = results.files.single.name;
-                                      storage.uploadFile(path, fileName).then((value) => print('Done'));
+                                      final fileName =
+                                          results.files.single.name;
+                                      storage
+                                          .uploadFile(path, fileName)
+                                          .then((value) => print('Done'));
                                       print(path);
                                       print(fileName);
                                     },
@@ -413,7 +388,7 @@ class _SignupState extends State<Signup> {
                                     image: image.text,
                                   );
                                 }
-                               // AppSettings.openLocationSettings();
+                                // AppSettings.openLocationSettings();
                                 //  return Signup2();
                               },
                               child: const Text('Sign up',
@@ -421,31 +396,6 @@ class _SignupState extends State<Signup> {
                                     fontSize: 18,
                                   ))),
                           fallback: (context) => CircularProgressIndicator(),
-                        ),
-                        const SizedBox(height: 30),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Already have an Account?",
-                              style: TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                      builder: (BuildContext context) {
-                                    return Login();
-                                  }));
-                                },
-                                child: Text(
-                                  "Log In",
-                                  style: TextStyle(
-                                    color: Mycolor.teal,
-                                  ),
-                                )),
-                          ],
                         ),
                       ],
                     ),

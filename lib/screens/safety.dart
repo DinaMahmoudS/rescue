@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:rescue2/screens/navigation_bar.dart';
-
 class Safety extends StatelessWidget {
   const Safety({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     late String phone;
@@ -31,7 +30,6 @@ class Safety extends StatelessWidget {
               style: TextStyle(fontSize: 25),
             ),
             centerTitle: true,
-
           ),
           body: Container(
             alignment: Alignment.center,
@@ -104,11 +102,13 @@ class Safety extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).get().then((value) => {
-
-                            phone =  value.get("em_number").toString(),
-
-                          });
+                          FirebaseFirestore.instance
+                              .collection("users")
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .get()
+                              .then((value) => {
+                                    phone = value.get("em_number").toString(),
+                                  });
 
                           _launchURL('tel:+${phone}');
                         },
@@ -120,7 +120,6 @@ class Safety extends StatelessWidget {
                         )),
                   ],
                 ),
-
               ],
             ),
           ),
@@ -128,6 +127,7 @@ class Safety extends StatelessWidget {
       ),
     );
   }
+
   void _launchURL(String _url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }

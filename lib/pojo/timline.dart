@@ -1,7 +1,9 @@
-class timeline{
-  String Content ;
-  String Date ;
-  String name ;
+class timeline {
+  String Content;
+
+  String Date;
+
+  String name;
 
   timeline({
     required this.Content,
@@ -9,15 +11,15 @@ class timeline{
     required this.name,
   });
 
-  Map<String,dynamic> toJson()=>{
-    'Content': Content,
-    'Date': Date,
-    'name': name,
-  };
+  Map<String, dynamic> toJson() => {
+        'Content': Content,
+        'Date': Date,
+        'name': name,
+      };
 
   static timeline fromJson(Map<String, dynamic> json) => timeline(
-    Content: json['Content'],
-    Date: json['Date'],
-    name: json['name'],
-  );
+        Content: json['Content'],
+        Date: json['Date'],
+        name: json['name'],
+      );
 }

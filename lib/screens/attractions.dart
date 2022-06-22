@@ -48,48 +48,55 @@ class _AttractionState extends State<Attraction> {
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(30),
                     bottomLeft: Radius.circular(30))),
-
-            // actions: const [ Icon(Icons.chat_outlined )],
             title: const Text(
               "services",
               style: TextStyle(fontSize: 25),
             ),
             centerTitle: true,
             leading:
-            //This is the arrow icon
-            IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
+                //This is the arrow icon
+                IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
                         return const Home();
                       }));
-                }),
+                    }),
           ),
-          body:Container(
+          body: Container(
             color: Mycolor.white,
             child: Column(
               children: [
-                const SizedBox(height: 20,),
-
-                const Image(image: AssetImage('assets/images/attraction.png'),height: 150,),
-                const Text("What are your services on the road?",
-                  style: TextStyle(fontSize: 18,color:Colors.black ),),
-
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Image(
+                  image: AssetImage('assets/images/attraction.png'),
+                  height: 150,
+                ),
+                const Text(
+                  "What are your services on the road?",
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Kind Of Car",
-                        style: TextStyle(fontSize: 22,
+                      Text(
+                        "Kind Of Car",
+                        style: TextStyle(
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: Mycolor.darkblue),),
+                            color: Mycolor.darkblue),
+                      ),
                     ],
                   ),
                 ),
-
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
@@ -102,79 +109,32 @@ class _AttractionState extends State<Attraction> {
                           child: Text(items),
                         );
                       }).toList(),
-
                       onChanged: (String? newValue) {
                         setState(() {
                           dropdownitemsvalue = newValue!;
                         });
                       },
-                      hint: const Text("Select item")
-                  ),
+                      hint: const Text("Select item")),
                 ),
-
-                /* Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              child:DropdownButton(
-                dropdownColor: Mycolor.Beige,
-                  value: _value,
-                  items: const [
-                    DropdownMenuItem(
-                      child: Text(
-                          "KIA",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
-                        value: "KIA",
-                      ),
-                    DropdownMenuItem(
-                      child: Text(
-                          "Nissan",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
-                        value: "Nissan",
-                      ),
-                    DropdownMenuItem(
-                      child: Text(
-                          "Mazda",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
-                        value: "Mazda",
-                      ),
-
-                  ],
-
-                onChanged: (String? value) {
-                      setState(() {
-                        _value = value.toString()!;
-                      });
-                    },
-                //  hint:Text("Select item"),
-              ),
-            ),*/
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Services",
-                        style: TextStyle(fontSize: 22,
-                            fontWeight: FontWeight.bold,color:Mycolor.darkblue ),),
+                      Text(
+                        "Services",
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Mycolor.darkblue),
+                      ),
                     ],
                   ),
                 ),
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
-                  child:DropdownButton(
+                  child: DropdownButton(
                       dropdownColor: Mycolor.Beige,
                       value: dropdownvalue,
                       items: services.map((String items) {
@@ -183,17 +143,16 @@ class _AttractionState extends State<Attraction> {
                           child: Text(items),
                         );
                       }).toList(),
-
                       onChanged: (String? newValue) {
                         setState(() {
                           dropdownvalue = newValue!;
                         });
                       },
-                      hint: const Text("Select item")
-                  ),
+                      hint: const Text("Select item")),
                 ),
-                SizedBox(height: 10,),
-
+                SizedBox(
+                  height: 10,
+                ),
                 AnimatedButton(
                   height: 50,
                   width: 250,
@@ -204,8 +163,6 @@ class _AttractionState extends State<Attraction> {
                   selectedTextColor: Colors.black,
                   transitionType: TransitionType.LEFT_TO_RIGHT,
                   backgroundColor: const Color(0xff48B5D6),
-                  //  borderWidth: 3,
-                  //  borderColor: Mycolor.red,
                   borderRadius: 50,
                   onPress: () {
                     FirebaseFirestore.instance.collection("attraction").add({
@@ -214,15 +171,14 @@ class _AttractionState extends State<Attraction> {
                       "carModel": dropdownitemsvalue,
                       "services": dropdownvalue,
                     }).whenComplete(() => {
-                    showToast2("car ${dropdownitemsvalue}  services ${dropdownvalue}")
-                    });
+                          showToast2(
+                              "car ${dropdownitemsvalue}  services ${dropdownvalue}")
+                        });
                   },
                 ),
-
-
               ],
             ),
-          ) ,
+          ),
         ),
       ),
     );

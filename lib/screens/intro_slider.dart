@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
-import 'package:rescue2/screens/user_signup/signup.dart';
+import 'package:rescue2/screens/user_login/login.dart';
 
 class IntroSliderPage extends StatefulWidget {
-   IntroSliderPage({Key? key}) : super(key: key);
+  IntroSliderPage({Key? key}) : super(key: key);
 
   @override
   _IntroSliderPageState createState() => _IntroSliderPageState();
@@ -53,7 +53,7 @@ class _IntroSliderPageState extends State<IntroSliderPage> {
   List<Widget> renderListCustomTabs() {
     List<Widget> tabs = [];
     for (int i = 0; i < slides.length; i++) {
-       Slide currentSlide = slides[i];
+      Slide currentSlide = slides[i];
       tabs.add(
         SizedBox(
           width: double.infinity,
@@ -66,7 +66,6 @@ class _IntroSliderPageState extends State<IntroSliderPage> {
               children: [
                 Container(
                   padding: const EdgeInsets.all(20),
-
                   child: Image.asset(
                     currentSlide.pathImage!,
                     matchTextDirection: true,
@@ -117,23 +116,19 @@ class _IntroSliderPageState extends State<IntroSliderPage> {
       renderSkipBtn: const Text("Skip"),
       renderNextBtn: const Text(
         "Next",
-
       ),
       renderDoneBtn: const Text(
         "Done",
-
       ),
-
       colorActiveDot: Colors.black,
       sizeDot: 8.0,
       typeDotAnimation: dotSliderAnimation.SIZE_TRANSITION,
       listCustomTabs: renderListCustomTabs(),
       scrollPhysics: BouncingScrollPhysics(),
-
       onDonePress: () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => Signup(),
+          builder: (_) => Login(),
         ),
       ),
     );
