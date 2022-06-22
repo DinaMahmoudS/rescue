@@ -6,7 +6,6 @@ import 'package:rescue2/screens/report.dart';
 import 'package:rescue2/screens/winchpage/shops.dart';
 import 'helppeople/mainpage.dart';
 
-
 class Home2 extends StatelessWidget {
   const Home2({Key? key}) : super(key: key);
 
@@ -25,10 +24,6 @@ class Home2 extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(30),
                     bottomLeft: Radius.circular(30))),
-
-            // leading: const Icon(Icons.menu_open_rounded, color: Colors.red, ),
-
-            // actions: const [ Icon(Icons.chat_outlined )],
             title: const Text(
               "Rescue",
               style: TextStyle(fontSize: 25),
@@ -94,7 +89,7 @@ class Home2 extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return  Shops();
+                              return Shops();
                             }));
                           },
                           child: const Text('Request Winch',
@@ -115,8 +110,8 @@ class Home2 extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
-                                  return const Main_Screen();
-                                }));
+                              return const Main_Screen();
+                            }));
                           },
                           child: const Text('Maintenance',
                               style: TextStyle(
@@ -136,7 +131,7 @@ class Home2 extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return  const Report();
+                              return const Report();
                             }));
                           },
                           child: const Text('Report For Traffic Jam',

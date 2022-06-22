@@ -3,27 +3,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:rescue2/screens/colors.dart';
 
 class Forgot extends StatefulWidget {
-   Forgot({Key? key}) : super(key: key);
+  Forgot({Key? key}) : super(key: key);
 
   @override
   State<Forgot> createState() => _ForgotState();
 }
 
 class _ForgotState extends State<Forgot> {
-   var emailController = TextEditingController();
+  var emailController = TextEditingController();
 
-   var passwordController = TextEditingController();
+  var passwordController = TextEditingController();
 
-   var re_passwordController = TextEditingController();
+  var re_passwordController = TextEditingController();
 
-   bool _isObscure = true;
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-
         body: Container(
           alignment: Alignment.center,
           color: Mycolor.white,
@@ -52,20 +51,18 @@ class _ForgotState extends State<Forgot> {
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             border: Border(
-                                bottom: BorderSide(color: Color(0xFF59769E),
-                                )
-                            )
-                        ),
+                                bottom: BorderSide(
+                          color: Color(0xFF59769E),
+                        ))),
                         child: TextField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            hintText: "E-mail",
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: Mycolor.teal,
-                            ),
-                              border: InputBorder.none
-                          ),
+                              hintText: "E-mail",
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: Mycolor.teal,
+                              ),
+                              border: InputBorder.none),
                           keyboardType: TextInputType.emailAddress,
                         ),
                       ),
@@ -73,33 +70,32 @@ class _ForgotState extends State<Forgot> {
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             border: Border(
-                                bottom: BorderSide(color: Color(0xFF59769E),
-                                )
-                            )
-                        ),
+                                bottom: BorderSide(
+                          color: Color(0xFF59769E),
+                        ))),
                         child: TextField(
                           obscureText: _isObscure,
                           controller: passwordController,
                           decoration: InputDecoration(
-                            hintText: "Password",
-
+                              hintText: "Password",
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _isObscure ? Icons.visibility_off : Icons.visibility,
-                                  color: Mycolor.teal,),
+                                  _isObscure
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Mycolor.teal,
+                                ),
                                 onPressed: () {
                                   setState(() {
                                     _isObscure = !_isObscure;
                                   });
                                 },
                               ),
-
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: Mycolor.teal,
-                            ),
-                              border: InputBorder.none
-                          ),
+                              prefixIcon: Icon(
+                                Icons.lock,
+                                color: Mycolor.teal,
+                              ),
+                              border: InputBorder.none),
                           keyboardType: TextInputType.visiblePassword,
                         ),
                       ),
@@ -107,33 +103,32 @@ class _ForgotState extends State<Forgot> {
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             border: Border(
-                                bottom: BorderSide(color: Color(0xFF59769E),
-                                )
-                            )
-                        ),
+                                bottom: BorderSide(
+                          color: Color(0xFF59769E),
+                        ))),
                         child: TextField(
                           obscureText: _isObscure,
                           controller: re_passwordController,
                           decoration: InputDecoration(
-                            hintText: "Retype-Password",
-
+                              hintText: "Retype-Password",
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _isObscure ? Icons.visibility_off : Icons.visibility,
-                                  color: Mycolor.teal,),
+                                  _isObscure
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Mycolor.teal,
+                                ),
                                 onPressed: () {
                                   setState(() {
                                     _isObscure = !_isObscure;
                                   });
                                 },
                               ),
-
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: Mycolor.teal,
-                            ),
-                              border: InputBorder.none
-                          ),
+                              prefixIcon: Icon(
+                                Icons.lock,
+                                color: Mycolor.teal,
+                              ),
+                              border: InputBorder.none),
                           keyboardType: TextInputType.visiblePassword,
                         ),
                       ),

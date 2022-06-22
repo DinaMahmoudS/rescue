@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +5,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'package:location/location.dart' as loc;
 
-class MapWidget extends StatefulWidget{
+class MapWidget extends StatefulWidget {
   const MapWidget({Key? key}) : super(key: key);
+
 // map
   @override
   State<MapWidget> createState() => MapWidgetState();
@@ -16,19 +16,18 @@ class MapWidget extends StatefulWidget{
 class MapWidgetState extends State<MapWidget> {
   Completer<GoogleMapController> _controller = Completer();
   final loc.Location location = loc.Location();
-  late loc.LocationData _locationResult ;
-  late double  originLatitude = 29.961962 , originLongitude = 29.961962 ;
+  late loc.LocationData _locationResult;
 
+  late double originLatitude = 29.961962, originLongitude = 29.961962;
 
   _getLocation() async {
     try {
       _locationResult = await location.getLocation();
-      originLatitude =  _locationResult.latitude!;
+      originLatitude = _locationResult.latitude!;
       originLongitude = _locationResult.longitude!;
     } on Exception {
       print('Could not get location');
     }
-
   }
 
   _getMyLocation() async {
@@ -44,31 +43,26 @@ class MapWidgetState extends State<MapWidget> {
       print(e);
     }
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    location.changeSettings(
-        interval: 300, accuracy: loc.LocationAccuracy.high);
+    location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
     _getLocation();
     _getMyLocation();
-
   }
 
-
-  Set<Marker> _createMarker(double LatLn, Lat)  {
+  Set<Marker> _createMarker(double LatLn, Lat) {
     return {
       Marker(
         markerId: MarkerId("marker_1"),
         position: LatLng(Lat, LatLn),
         infoWindow: InfoWindow(
-            title: 'me',
-            snippet: "${LatLn } LatLn + LatLn  ${LatLn}"),
+            title: 'me', snippet: "${LatLn} LatLn + LatLn  ${LatLn}"),
       ),
-
-
     };
   }
 
@@ -76,11 +70,8 @@ class MapWidgetState extends State<MapWidget> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
-
-
         mapType: MapType.normal,
         myLocationEnabled: true,
-        //markers: _createMarker(originLongitude, originLongitude),
         initialCameraPosition: CameraPosition(
           target: LatLng(originLatitude, originLongitude),
           zoom: 5.0,

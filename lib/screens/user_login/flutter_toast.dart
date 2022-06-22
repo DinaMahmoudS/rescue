@@ -1,24 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:rescue2/Buttons%20Screens/Milage/Milage.dart';
-import 'package:app_settings/app_settings.dart';
 import 'package:rescue2/screens/colors.dart';
 
-var Content , Date;
+var Content, Date;
 
 void showToast() => Fluttertoast.showToast(
       msg: "Saved",
       fontSize: 18,
       backgroundColor: Mycolor.darkblue,
       timeInSecForIosWeb: 2,
-      // AppSettings.openLocationSettings();
     );
 
 void showToast2(String msg) => Fluttertoast.showToast(
       msg: msg,
       fontSize: 18,
-      backgroundColor: Colors.red,
+      backgroundColor: Mycolor.red,
       timeInSecForIosWeb: 2,
     );
 
@@ -54,7 +50,7 @@ Future createData(
   final json = {
     'Content': data,
     'Date': DateTime.now().toString(),
-    'name' :coll2
+    'name': coll2
   };
   await docMilage.set(json).then((value) {
     showToast2("Done");

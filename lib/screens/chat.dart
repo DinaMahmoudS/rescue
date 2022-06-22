@@ -1,17 +1,3 @@
-// Copyright 2021 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -144,12 +130,10 @@ class _ChatState extends State<Chat> {
     // TODO Get the transcript and detectedIntent and show on screen
 
     final responseStream =
-    dialogflow.streamingDetectIntent(config, _audioStream);
+        dialogflow.streamingDetectIntent(config, _audioStream);
     // Get the transcript and detectedIntent and show on screen
     responseStream.listen((data) {
-      //print('----');
       setState(() {
-        //print(data);
         String transcript = data.recognitionResult.transcript;
         String queryText = data.queryResult.queryText;
         String fulfillmentText = data.queryResult.fulfillmentText;
@@ -175,11 +159,7 @@ class _ChatState extends State<Chat> {
           _textController.text = transcript;
         }
       });
-    }, onError: (e) {
-      //print(e);
-    }, onDone: () {
-      //print('done');
-    });
+    }, onError: (e) {}, onDone: () {});
   }
 
   // The chat interface
@@ -188,64 +168,52 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-
       Flexible(
           child: ListView.builder(
-            padding: EdgeInsets.all(8.0),
-            reverse: true,
-            itemBuilder: (_, int index) => _messages[index],
-            itemCount: _messages.length,
-          )),
-
+        padding: EdgeInsets.all(8.0),
+        reverse: true,
+        itemBuilder: (_, int index) => _messages[index],
+        itemCount: _messages.length,
+      )),
       Divider(height: 1.0),
       Container(
-
           decoration: BoxDecoration(color: Theme.of(context).cardColor),
           child: IconTheme(
             data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
             child: Container(
-
               margin: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Flexible(
                     child: TextField(
                       controller: _textController,
                       onSubmitted: handleSubmitted,
                       decoration:
-                      InputDecoration.collapsed(hintText: "Send a message"),
-
-
+                          InputDecoration.collapsed(hintText: "Send a message"),
                     ),
-
                   ),
-                 // const SizedBox(height: 100,),
                   Container(
-
                     margin: EdgeInsets.symmetric(horizontal: 4.0),
                     child: IconButton(
                       color: Mycolor.darkblue,
                       icon: Icon(Icons.send),
                       onPressed: () => handleSubmitted(_textController.text),
                     ),
-
                   ),
-                  const SizedBox(height: 200,),
-                    IconButton(
-                      color: Mycolor.darkblue,
-                      iconSize: 30.0,
-                      icon: Icon(_isRecording ? Icons.mic_off : Icons.mic),
-                      onPressed: _isRecording ? stopStream : handleStream,
-                    ),
+                  const SizedBox(
+                    height: 200,
+                  ),
+                  IconButton(
+                    color: Mycolor.darkblue,
+                    iconSize: 30.0,
+                    icon: Icon(_isRecording ? Icons.mic_off : Icons.mic),
+                    onPressed: _isRecording ? stopStream : handleStream,
+                  ),
                 ],
               ),
-
             ),
-
           )),
-    ]
-    );
+    ]);
   }
 }
 
@@ -299,9 +267,9 @@ class ChatMessage extends StatelessWidget {
         margin: const EdgeInsets.only(left: 16.0),
         child: CircleAvatar(
             child: Text(
-              this.name[0],
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )),
+          this.name[0],
+          style: TextStyle(fontWeight: FontWeight.bold),
+        )),
       ),
     ];
   }

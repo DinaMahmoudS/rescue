@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,7 @@ class Tires extends StatefulWidget {
 
 class _TiresState extends State<Tires> {
   final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,15 +56,15 @@ class _TiresState extends State<Tires> {
             centerTitle: true,
 //Leading is used to put the items on the left side on the app bar but in this case the icon
             leading:
-            //This is the arrow icon
-            IconButton(
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
+                //This is the arrow icon
+                IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
                         return Main_Screen();
                       }));
-                }),
+                    }),
 //Action is used to put the items on the right side on the app bar but in this case the icon
             actions: [
 //Padding is used here to adjust the place of the icon below
@@ -85,7 +85,8 @@ class _TiresState extends State<Tires> {
                   padding: const EdgeInsets.only(right: 30, left: 30),
                   child: Container(
                     height: 70,
-                    child:  TextField( controller: controller,
+                    child: TextField(
+                      controller: controller,
                       decoration: InputDecoration(
                         hoverColor: Colors.white,
                         hintText: "Milage when last changed tires",
@@ -112,14 +113,17 @@ class _TiresState extends State<Tires> {
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
                           final battery = controller.text;
-                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Tires');
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return Main_Screen();
-                              }));
+                          createData(
+                              coll: 'Maintenance',
+                              data: battery,
+                              doc: FirebaseAuth.instance.currentUser!.uid,
+                              coll2: 'Tires');
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return Main_Screen();
+                          }));
                         },
-                        child: Text("Done"))
-                ),
+                        child: Text("Done"))),
               ]),
         ),
       ),
