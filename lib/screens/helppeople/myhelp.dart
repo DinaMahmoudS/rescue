@@ -2,9 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/pojo/help_user.dart';
+import 'package:rescue2/screens/ButtomSheatHelper.dart';
 import 'package:rescue2/screens/colors.dart';
+import 'package:rescue2/screens/user_login/flutter_toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../navigation_bar.dart';
+import 'chat.dart';
 
 class HelpFrompeople extends StatefulWidget {
   const HelpFrompeople({Key? key}) : super(key: key);
@@ -115,7 +119,15 @@ class _HelpFrompeopleState extends State<HelpFrompeople> {
             color: Mycolor.green,
           ),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              FirebaseFirestore.instance.collection("users").doc(userData.helpFrom)
+                  .get().then((value) => {
+
+
+                _showMyDialog(context,  "${value.get("number")}", "${value.get("name")} "," ${value.get("car_model")} "),
+
+              });
+            },
             child: Column(
               children: [
                 Align(
@@ -146,7 +158,7 @@ class _HelpFrompeopleState extends State<HelpFrompeople> {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    ' ${userData.helpFrom} | ${userData.other}',
+                    ' ${userData.status} | ${userData.other}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -154,9 +166,113 @@ class _HelpFrompeopleState extends State<HelpFrompeople> {
                     ),
                   ),
                 ),
+
               ],
             ),
           ),
         ),
       );
+
+  Future<void> _showMyDialog(
+      BuildContext context, String phone, String name, String carModel) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Align(
+              alignment: Alignment.topRight,
+              child: Text(
+                "",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              )),
+          content: SingleChildScrollView(
+            child: /*Column(
+              //crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  phone,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),*/
+            Column(
+              children: [
+
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        "   name : ${name}  ",
+                        style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold,),
+
+                      ),
+
+                    ),
+                    ],
+                ),
+                SizedBox(height: 15,),
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        "   phone : ${phone}  ",
+                        style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        "   car model : ${carModel}",
+                        style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ),
+          actions: <Widget>[
+            IconButton(
+                onPressed: () {
+                  _launchURL("tel:${phone}");
+                },
+                icon: Icon(Icons.phone,color: Mycolor.red,size: 30,)),
+            SizedBox(
+              width: 5,
+            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => ChatScreen()));
+                },
+                icon: Icon(Icons.chat,color: Mycolor.red,size: 30)),
+
+          ],
+        );
+      },
+    );
+  }
+
+  void _launchURL(String _url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
 }

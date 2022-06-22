@@ -67,6 +67,7 @@ dependencies:
   firebase_storage: ^10.2.15
   file_picker: ^4.5.1
   geolocator:
+  native_notify: ^0.0.13
 
 
 dev_dependencies:

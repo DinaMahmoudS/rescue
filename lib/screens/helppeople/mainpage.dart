@@ -202,7 +202,8 @@ class _HelppeopleState extends State<Helppeople> {
                                           .doc(element.id.toString())
                                           .update({
                                         "helpFrom":
-                                            "${FirebaseAuth.instance.currentUser!.uid}"
+                                            "${FirebaseAuth.instance.currentUser!.uid}",
+                                        "status":"accepted"
                                       }).then((value) => {
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(

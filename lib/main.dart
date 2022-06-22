@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rescue2/bloc_observer.dart';
 import 'package:rescue2/network/remote/dio_helper.dart';
-
+import 'package:native_notify/native_notify.dart';
 import 'package:rescue2/screens/SplashScreen.dart';
 
 Future main() async {
@@ -11,6 +11,8 @@ Future main() async {
   await Firebase.initializeApp();
   BlocOverrides.runZoned(
     () {
+      WidgetsFlutterBinding.ensureInitialized();
+      NativeNotify.initialize(958, '2dYEKXkdMHF4Nk9Dm5zb2S', null, null);
       runApp(
 // entry point MaterialApp
           MaterialApp(
@@ -22,7 +24,7 @@ Future main() async {
         // this SplashScreen
         home: SplashScreen(),
       ));
-      // Use cubits...
+      // Use cubit's...
     },
     blocObserver: MyBlocObserver(),
   );
