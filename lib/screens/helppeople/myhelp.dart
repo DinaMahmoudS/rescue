@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/pojo/help_user.dart';
-import 'package:rescue2/screens/ButtomSheatHelper.dart';
 import 'package:rescue2/screens/colors.dart';
-import 'package:rescue2/screens/user_login/flutter_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../navigation_bar.dart';
@@ -34,7 +32,7 @@ class _HelpFrompeopleState extends State<HelpFrompeople> {
                   bottomRight: Radius.circular(30),
                   bottomLeft: Radius.circular(30))),
           title: const Text(
-            "History",
+            "Requests Status",
             style: TextStyle(fontSize: 23),
           ),
           centerTitle: true,
