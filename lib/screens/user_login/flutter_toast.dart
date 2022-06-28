@@ -8,14 +8,14 @@ void showToast() => Fluttertoast.showToast(
       msg: "Saved",
       fontSize: 18,
       backgroundColor: Mycolor.darkblue,
-      timeInSecForIosWeb: 2,
+      timeInSecForIosWeb: 3,
     );
 
 void showToast2(String msg) => Fluttertoast.showToast(
       msg: msg,
       fontSize: 18,
       backgroundColor: Mycolor.red,
-      timeInSecForIosWeb: 2,
+      timeInSecForIosWeb: 3,
     );
 
 String printText(
