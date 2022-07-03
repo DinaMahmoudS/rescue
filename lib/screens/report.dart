@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,10 +6,6 @@ import 'package:rescue2/pojo/trafc.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/navigation_bar.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
-
-import '../pojo/help_user.dart';
-import 'helppeople/InvitationScreen.dart';
-import 'helppeople/request.dart';
 
 class Report extends StatefulWidget {
   const Report({Key? key}) : super(key: key);
@@ -68,7 +63,7 @@ class _ReportState extends State<Report> {
           color: Mycolor.white,
           child: Column(
               children: <Widget>[
-                const SizedBox(height: 50),
+                const SizedBox(height: 40),
                 Column(
                   children: [
                     Image.asset(
@@ -95,7 +90,7 @@ class _ReportState extends State<Report> {
                             suffixIcon: Icon(Icons.send)
                         ),
                       ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
                     TextFormField(
                       controller: causesCon,
                       decoration: InputDecoration(
@@ -128,7 +123,8 @@ class _ReportState extends State<Report> {
                     onPressed: () {
                       if (_locationCon.text.isEmpty) {
                         showToast2("Please enter your location");
-                      } else if (causesCon.text.isEmpty) {
+                      } else
+                        if (causesCon.text.isEmpty) {
                         showToast2("Please enter your causes");
                       } else {
                         FirebaseFirestore.instance.collection('traffic').add({
@@ -209,7 +205,7 @@ class _ReportState extends State<Report> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              '${userData.uuid}',
+              '${userData.uuid} ',
               style: TextStyle(
                 color: Colors.blue,
                 fontSize: 18,
