@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:rescue2/pojo/Map.dart';
 import 'package:rescue2/screens/helppeople/chat.dart';
+import 'package:rescue2/screens/helppeople/mainpage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../ButtomSheatHelper.dart';
@@ -23,7 +24,9 @@ class InvitationScreen extends StatefulWidget {
 class _InvitationScreenState extends State<InvitationScreen> {
   final loc.Location location = loc.Location();
   Completer<GoogleMapController> _controller = Completer();
-  late String name = "", phone = "", car = "";
+  late String name = "",
+      phone = "",
+      car = "";
 
   @override
   void initState() {
@@ -35,72 +38,84 @@ class _InvitationScreenState extends State<InvitationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         title: Text('Map',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-            )),
-        leading: Padding(
-          padding: const EdgeInsets.all(10),
-          child: InkWell(
-            onTap: () {
-              _getMyLocation();
-            },
-            child: Container(
-              alignment: Alignment.center,
-              width: size.width * 0.12,
-              height: size.height * 0.06,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.teal,
-              ),
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-                size: 10,
-              ),
-            ),
-          ),
-        ),
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: FutureBuilder<Google_Map?>(
-          future: readUser(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final user = snapshot.data;
-              return user == null
-                  ? Center(child: Text("no User"))
-                  : buildUser(user);
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  "error ${snapshot.error}",
-                  style: TextStyle(color: Colors.black),
-                ),
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
-      ),
+        style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w700,
+    )),
+    leading: Padding(
+    padding: const EdgeInsets.all(10),
+    child: InkWell(
+    onTap: () {
+    _getMyLocation();
+    },
+    child: Container(
+    alignment: Alignment.center,
+    width: size.width * 0.12,
+    height: size.height * 0.06,
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: Colors.teal,
+    ),
+    child: IconButton(
+    icon: Icon(Icons.arrow_back_ios),
+    color: Colors.white,
+    onPressed: () {
+    Navigator.push(context,
+    MaterialPageRoute(
+    builder: (BuildContext context) {
+    return Helppeople();
+    },
+    )
     );
+    }
+    ),
+    ),
+    ),
+    ),
+        ),
+
+    body: Container(
+    width: double.infinity,
+    height: double.infinity,
+    child: FutureBuilder<Google_Map?>(
+    future: readUser(),
+    builder: (context, snapshot) {
+    if (snapshot.hasData) {
+    final user = snapshot.data;
+    return user == null
+    ? Center(child: Text("no User"))
+        : buildUser(user);
+    } else if (snapshot.hasError) {
+    return Center(
+    child: Text(
+    "error ${snapshot.error}",
+    style: TextStyle(color: Colors.black),
+    ),
+    );
+    } else {
+    return Center(
+    child: CircularProgressIndicator(),
+    );
+    }
+    },
+    ),
+    ),
+    );
+
   }
 
   Future<Google_Map?> readUser() async {
     final me =
-        FirebaseFirestore.instance.collection("maps").doc("${widget.uuid}");
+    FirebaseFirestore.instance.collection("maps").doc("${widget.uuid}");
     final snapshot = await me.get();
     if (snapshot.exists) {
       return Google_Map.fromJson(snapshot.data()!);
@@ -144,11 +159,12 @@ class _InvitationScreenState extends State<InvitationScreen> {
         .collection("users")
         .doc(widget.uuid)
         .get()
-        .then((value) => {
-              name = value.get("name").toString(),
-              phone = value.get("number").toString(),
-              car = value.get("car_model").toString(),
-            });
+        .then((value) =>
+    {
+      name = value.get("name").toString(),
+      phone = value.get("number").toString(),
+      car = value.get("car_model").toString(),
+    });
     return {
       Marker(
         markerId: MarkerId("marker_1"),
@@ -172,8 +188,8 @@ class _InvitationScreenState extends State<InvitationScreen> {
     };
   }
 
-  Future<void> _showMyDialog(
-      BuildContext context, String phone, String name) async {
+  Future<void> _showMyDialog(BuildContext context, String phone,
+      String name) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -231,6 +247,9 @@ class _InvitationScreenState extends State<InvitationScreen> {
   }
 
   void _launchURL(String _url) async {
-    if (!await launch(_url)) throw 'Could not launch $_url';
+    if (!await launch(_url)
+    )
+      throw
+      'Could not launch $_url';
   }
 }

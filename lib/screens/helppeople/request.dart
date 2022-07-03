@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rescue2/screens/helppeople/mainpage.dart';
 import 'package:rescue2/screens/helppeople/map_widget.dart';
 import 'package:rescue2/screens/helppeople/panel_widget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -24,6 +25,22 @@ class _RequestState extends State<Request> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+              leading : IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return Helppeople();
+                          },
+                        )
+                    );
+                  }
+              ),
+            ),
+
       backgroundColor: Colors.white,
       body: SlidingUpPanel(
         body: MapWidget(),
