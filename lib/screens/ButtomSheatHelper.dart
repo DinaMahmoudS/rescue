@@ -58,25 +58,17 @@ class _ButtomSheatHelperState extends State<ButtomSheatHelper> {
                 Container(
                   child: Text(
                     "   name : ${widget.name}  ",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold,),
+
                   ),
+
                 ),
-                SizedBox(
-                  width: 150,
-                ),
-                IconButton(
+                 SizedBox(width: 150,),
+                 IconButton(
                     onPressed: () {
                       _launchURL("tel:${widget.phone}");
                     },
-                    icon: Icon(
-                      Icons.phone,
-                      color: Mycolor.red,
-                      size: 30,
-                    )),
+                    icon: Icon(Icons.phone,color: Mycolor.red,size: 30,)),
                 SizedBox(
                   width: 5,
                 ),
@@ -85,7 +77,7 @@ class _ButtomSheatHelperState extends State<ButtomSheatHelper> {
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => ChatScreen()));
                     },
-                    icon: Icon(Icons.chat, color: Mycolor.red, size: 30)),
+                    icon: Icon(Icons.chat,color: Mycolor.red,size: 30)),
               ],
             ),
             Row(
@@ -93,26 +85,18 @@ class _ButtomSheatHelperState extends State<ButtomSheatHelper> {
                 Container(
                   child: Text(
                     "   phone : ${widget.phone}  ",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 15,),
             Row(
               children: [
                 Container(
                   child: Text(
                     "   car model : ${widget.carModel}",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

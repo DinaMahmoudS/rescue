@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue2/MapScreen.dart';
 import 'package:rescue2/home_chat.dart';
-import 'package:rescue2/screens/location.dart';
 import 'package:rescue2/screens/safety.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/home2.dart';
@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   final screens = [
     const Home2(),
     const Safety(),
-    Mapscreens(),
+    MapScreen(),
     MyHomePage(
       title: 'Chatbot-Helper',
     ),
