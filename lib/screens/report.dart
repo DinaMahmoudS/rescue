@@ -47,7 +47,7 @@ class _ReportState extends State<Report> {
                   bottomLeft: Radius.circular(30))),
 
           title: const Text(
-            "Help From People",
+            "Report for traffic jam",
             style: TextStyle(fontSize: 23),
           ),
           centerTitle: true,
