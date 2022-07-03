@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 
-class Mapscreens extends StatefulWidget{
+class Mapscreens extends StatefulWidget {
   const Mapscreens({Key? key}) : super(key: key);
 
   @override
@@ -33,7 +33,6 @@ class MapscreensState extends State<Mapscreens> {
           _controller.complete(controller);
         },
       ),
-
     );
   }
 }

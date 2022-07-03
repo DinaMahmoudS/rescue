@@ -7,8 +7,12 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:rescue2/screens/user_login/flutter_toast.dart';
 import '../colors.dart';
 
-Widget Item(BuildContext context ,
-{required String uuid , required String name , required String location , required String status ,  required String phone  }) {
+Widget Item(BuildContext context,
+    {required String uuid,
+    required String name,
+    required String location,
+    required String status,
+    required String phone}) {
   return GestureDetector(
     onTap: () {
       showMaterialModalBottomSheet(
@@ -56,24 +60,24 @@ Widget Item(BuildContext context ,
                         ),
                         InkWell(
                           onTap: () {
-                            if(status == "OFF"){
+                            if (status == "OFF") {
                               showToast2("This person is help another person");
-                            }else {
-                              FirebaseFirestore.instance.collection("requset winsh").doc(FirebaseAuth.instance.currentUser!.uid).set({
+                            } else {
+                              FirebaseFirestore.instance
+                                  .collection("requset winsh")
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .set({
                                 "name": name,
                                 "phone": phone,
                                 "uuid": uuid,
-                                "userid": FirebaseAuth.instance.currentUser!.uid,
+                                "userid":
+                                    FirebaseAuth.instance.currentUser!.uid,
                                 "location": location,
                                 "status": "pending",
                                 "time": DateTime.now().toString(),
-                              }).whenComplete(() => {
-                                showToast2("Request sent")
-                              });
-
-
+                              }).whenComplete(
+                                      () => {showToast2("Request sent")});
                             }
-
                           },
                           child: Container(
                             alignment: Alignment.center,
@@ -107,7 +111,9 @@ Widget Item(BuildContext context ,
                 //height: 80,
                 child: Column(
                   children: [
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
                         Icon(
@@ -176,9 +182,10 @@ Widget Item(BuildContext context ,
                 ),
                 //height: 80,
                 child: Column(
-
                   children: [
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
                         Icon(
@@ -243,7 +250,9 @@ Widget Item(BuildContext context ,
                 //height: 80,
                 child: Column(
                   children: [
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
                         Icon(
@@ -300,187 +309,6 @@ Widget Item(BuildContext context ,
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                //height: 80,
-                child: Column(
-                  children: [
-                    SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.car_rental,
-                          color: Mycolor.black,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 1,
-                          height: 35,
-                          color: Colors.black26,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Car Types',
-                              style: TextStyle(
-                                color: Mycolor.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'All,BMW,Opel',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 1,
-                      color: Colors.black26,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                //height: 80,
-                child: Column(
-                  children: [
-                    SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.chat,
-                          color: Mycolor.black,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 1,
-                          height: 35,
-                          color: Colors.black26,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Send WhatsApp Message',
-                              style: TextStyle(
-                                color: Mycolor.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 1,
-                      color: Colors.black26,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                //height: 80,
-                child: Column(
-                  children: [
-                    SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.miscellaneous_services,
-                          color: Mycolor.black,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 1,
-                          height: 35,
-                          color: Colors.black26,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Services',
-                              style: TextStyle(
-                                color:  Mycolor.darkblue,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    // Container(
-                    //   width: double.infinity,
-                    //   height: 1,
-                    //   color: Colors.black26,
-                    // ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),
@@ -518,21 +346,12 @@ Widget Item(BuildContext context ,
                   SizedBox(
                     height: 20,
                   ),
-                  // CircleAvatar(
-                  //   backgroundColor: Colors.yellow,
-                  //   radius: 40,
-                  //   child: Icon(
-                  //     Icons.car_rental,
-                  //     size: 50,
-                  //     color: Colors.black,
-                  //   ),
-                  // ),
                   Container(
                     width: 80,
                     height: 80,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color:  Mycolor.red,
+                        color: Mycolor.red,
                         borderRadius: BorderRadius.circular(70),
                         boxShadow: [
                           BoxShadow(
@@ -547,7 +366,6 @@ Widget Item(BuildContext context ,
                       color: Colors.black,
                     ),
                   ),
-
                   SizedBox(
                     height: 20,
                   ),
@@ -572,7 +390,7 @@ Widget Item(BuildContext context ,
                   Column(
                     children: [
                       Text(
-                    name,
+                        name,
                         style: TextStyle(color: Mycolor.red),
                       ),
                       Row(

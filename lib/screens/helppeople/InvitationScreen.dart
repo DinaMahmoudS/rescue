@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:rescue2/pojo/Map.dart';
-import 'package:rescue2/screens/chat.dart';
 import 'package:rescue2/screens/helppeople/chat.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,25 +17,21 @@ class InvitationScreen extends StatefulWidget {
   InvitationScreen({Key? key, required this.uuid}) : super(key: key);
 
   @override
-  _InvitationScreenState createState() => _InvitationScreenState();}
+  _InvitationScreenState createState() => _InvitationScreenState();
+}
 
 class _InvitationScreenState extends State<InvitationScreen> {
   final loc.Location location = loc.Location();
   Completer<GoogleMapController> _controller = Completer();
-  late String name = "",phone ="", car="";
-
+  late String name = "", phone = "", car = "";
 
   @override
   void initState() {
     super.initState();
-    //_requestPermission();
-    location.changeSettings(
-        interval: 300, accuracy: loc.LocationAccuracy.high);
+    location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
     _getMyLocation();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +50,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
           padding: const EdgeInsets.all(10),
           child: InkWell(
             onTap: () {
-              //print("getUsersUId "+_authClass.getUsersUId());
               _getMyLocation();
-              /* Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => HomeScreen(email: "",)));*/
             },
             child: Container(
               alignment: Alignment.center,
@@ -90,7 +82,10 @@ class _InvitationScreenState extends State<InvitationScreen> {
                   : buildUser(user);
             } else if (snapshot.hasError) {
               return Center(
-                child: Text("error ${snapshot.error}", style: TextStyle(color: Colors.black),),
+                child: Text(
+                  "error ${snapshot.error}",
+                  style: TextStyle(color: Colors.black),
+                ),
               );
             } else {
               return Center(
@@ -104,7 +99,8 @@ class _InvitationScreenState extends State<InvitationScreen> {
   }
 
   Future<Google_Map?> readUser() async {
-    final me = FirebaseFirestore.instance.collection("maps").doc("${widget.uuid}");
+    final me =
+        FirebaseFirestore.instance.collection("maps").doc("${widget.uuid}");
     final snapshot = await me.get();
     if (snapshot.exists) {
       return Google_Map.fromJson(snapshot.data()!);
@@ -115,19 +111,19 @@ class _InvitationScreenState extends State<InvitationScreen> {
     return Container(
       child: GoogleMap(
         initialCameraPosition: CameraPosition(
-            target: LatLng(double.parse(user.latitude) ,double.parse(user.longitude)), zoom: 5.0, tilt: 0, bearing: 0),
-        onMapCreated:  (GoogleMapController controller) {
+            target: LatLng(
+                double.parse(user.latitude), double.parse(user.longitude)),
+            zoom: 5.0,
+            tilt: 0,
+            bearing: 0),
+        onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
         myLocationEnabled: true,
         markers: _createMarker(user.latitude, user.longitude),
-
-        // trafficEnabled: true,
       ),
     );
   }
-
-
 
   _getMyLocation() async {
     String id = FirebaseAuth.instance.currentUser!.uid;
@@ -144,34 +140,40 @@ class _InvitationScreenState extends State<InvitationScreen> {
   }
 
   Set<Marker> _createMarker(String LatLn, Lat) {
-  FirebaseFirestore.instance.collection("users").doc(widget.uuid).get().then((value) => {
-    name =  value.get("name").toString(),
-    phone =  value.get("number").toString(),
-    car =  value.get("car_model").toString(),
-  });
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.uuid)
+        .get()
+        .then((value) => {
+              name = value.get("name").toString(),
+              phone = value.get("number").toString(),
+              car = value.get("car_model").toString(),
+            });
     return {
       Marker(
         markerId: MarkerId("marker_1"),
         position: LatLng(double.parse(LatLn), double.parse(Lat)),
         infoWindow: InfoWindow(
             title: 'name : ${name}',
-            onTap: (){
+            onTap: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return ButtomSheatHelper(name: '${name}', phone: '${phone}', carModel: '${car}' ,);
+                  return ButtomSheatHelper(
+                    name: '${name}',
+                    phone: '${phone}',
+                    carModel: '${car}',
+                  );
                 },
               );
-            // _showMyDialog(context, phone, name);
             },
             snippet: "phone ${phone} car model ${car}"),
       ),
-
-
     };
   }
 
-  Future<void> _showMyDialog(BuildContext context, String phone, String name) async {
+  Future<void> _showMyDialog(
+      BuildContext context, String phone, String name) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -179,14 +181,32 @@ class _InvitationScreenState extends State<InvitationScreen> {
         return AlertDialog(
           title: Align(
               alignment: Alignment.topRight,
-              child:  Text("${name}",style: TextStyle(color: Colors.black,fontSize:18,fontWeight: FontWeight.w700,),)),
+              child: Text(
+                "${name}",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              )),
           content: SingleChildScrollView(
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-
-                Text(name,style: TextStyle(color: Colors.black,fontSize:16,fontWeight: FontWeight.w700),),
-                Text(phone,style: TextStyle(color: Colors.black,fontSize:16,fontWeight: FontWeight.w700),),
+                Text(
+                  name,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  phone,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                ),
               ],
             ),
           ),
@@ -210,9 +230,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
     );
   }
 
-
   void _launchURL(String _url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
-
 }

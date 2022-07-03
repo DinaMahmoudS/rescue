@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:location/location.dart';
 
 class LocationService {
-
-
   sendLocationToDataBase(context) async {
     Location location = new Location();
     bool _serviceEnabled;
@@ -26,21 +23,8 @@ class LocationService {
       }
     }
     _locationData = await location.getLocation();
-
-    /*DocumentReference ref = _service.db
-        .collection('sections')
-        .doc(sectionID(context))
-        .collection('subSections')
-        .doc(subSectionID(context))
-        .collection('activities')
-        .doc(activityID(context));
-    ref.update(
-      {
-        'latitude': _locationData.latitude,
-        'longitude': _locationData.longitude,
-      },
-    ); */
   }
+
   goToMaps(double latitude, double longitude) async {
     String mapLocationUrl =
         "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";

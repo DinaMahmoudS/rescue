@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -115,13 +114,16 @@ class _BatteryState extends State<Battery> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-
                           final battery = controller.text;
-                          createData(coll: 'Maintenance',data: battery,doc: FirebaseAuth.instance.currentUser!.uid, coll2: 'Battery');
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return Main_Screen();
-                              }));
+                          createData(
+                              coll: 'Maintenance',
+                              data: battery,
+                              doc: FirebaseAuth.instance.currentUser!.uid,
+                              coll2: 'Battery');
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return Main_Screen();
+                          }));
                         },
                         child: Text("Done"))),
               ]),

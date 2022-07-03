@@ -5,11 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/pojo/timline.dart';
-import 'package:rescue2/screens/ButtomSheatHelper.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/Buttons Screens/Main Screen/Main Screen.dart';
-
-import '../../screens/user_login/flutter_toast.dart';
 
 class Timeline extends StatefulWidget {
   const Timeline({Key? key}) : super(key: key);
@@ -30,13 +27,13 @@ class _TimelineState extends State<Timeline> {
       debugShowCheckedModeBanner: false,
       //This is the declaration of the home screen
       home: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/Tiimeline.jpg"),
-            fit: BoxFit.cover,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/Tiimeline.jpg"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: Scaffold(
+          child: Scaffold(
             backgroundColor: Mycolor.white,
             appBar: AppBar(
 //This is the color of the app bar's BackGround
@@ -59,42 +56,25 @@ class _TimelineState extends State<Timeline> {
               centerTitle: true,
 //Leading is used to put the items on the left side on the app bar but in this case the icon
               leading:
-              //This is the arrow icon
-              IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
+                  //This is the arrow icon
+                  IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
                           return Main_Screen();
                         }));
-                  }),
+                      }),
 //Action is used to put the items on the right side on the app bar but in this case the icon
 
               actions: [
-                Row(
-                  children: [
-                    //Padding is used here to adjust the place of the icon below
-                    Padding(
-                        padding: EdgeInsets.only(right: 40),
+                Padding(
+                    padding: EdgeInsets.only(right: 80),
 //This the icon
-                        child: Container(
-                            height: 30,
-                            width: 30,
-                            child:
-                            Image.asset("assets/images/timeline (1).png"))),
-                    IconButton(
-                      icon: Icon(Icons.info_outline_rounded),
-                      onPressed: () {
-                       /* showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ButtomSheatHelper(name: '', phone: '',);
-                          },
-                        );*/
-                      },
-                    ),
-                  ],
-                ),
+                    child: Container(
+                        height: 30,
+                        width: 30,
+                        child: Image.asset("assets/images/timeline (1).png"))),
               ],
             ),
             body: Center(
@@ -104,7 +84,6 @@ class _TimelineState extends State<Timeline> {
                 color: Mycolor.white,
                 child: Column(
                   children: [
-
                     Expanded(
                       child: StreamBuilder<List<timeline>>(
                         stream: readTimline("Milage"),
@@ -112,13 +91,11 @@ class _TimelineState extends State<Timeline> {
                           if (snapshot.hasData) {
                             final users = snapshot.data!;
                             if (users.contains("false")) {
-                              
                               return Text(
-                                "no friends for you",
+                                "No Data",
                                 style: TextStyle(color: Colors.black),
                               );
                             } else {
-                              
                               // return Text("no friends you" , style: TextStyle(color: Colors.white),);
                               return ListView(
                                 children: users.map(buildTimeLine).toList(),
@@ -143,13 +120,11 @@ class _TimelineState extends State<Timeline> {
                           if (snapshot.hasData) {
                             final users = snapshot.data!;
                             if (users.contains("false")) {
-                              
                               return Text(
-                                "no friends for you",
+                                "No Data",
                                 style: TextStyle(color: Colors.black),
                               );
                             } else {
-
                               // return Text("no friends you" , style: TextStyle(color: Colors.white),);
                               return ListView(
                                 children: users.map(buildTimeLine).toList(),
@@ -174,13 +149,11 @@ class _TimelineState extends State<Timeline> {
                           if (snapshot.hasData) {
                             final users = snapshot.data!;
                             if (users.contains("false")) {
-                              
                               return Text(
-                                "no friends for you",
+                                "No Data",
                                 style: TextStyle(color: Colors.black),
                               );
                             } else {
-                              
                               // return Text("no friends you" , style: TextStyle(color: Colors.white),);
                               return ListView(
                                 children: users.map(buildTimeLine).toList(),
@@ -205,13 +178,11 @@ class _TimelineState extends State<Timeline> {
                           if (snapshot.hasData) {
                             final users = snapshot.data!;
                             if (users.contains("false")) {
-                              
                               return Text(
-                                "no friends for you",
+                                "No Data",
                                 style: TextStyle(color: Colors.black),
                               );
                             } else {
-
                               // return Text("no friends you" , style: TextStyle(color: Colors.white),);
                               return ListView(
                                 children: users.map(buildTimeLine).toList(),
@@ -236,9 +207,8 @@ class _TimelineState extends State<Timeline> {
                           if (snapshot.hasData) {
                             final users = snapshot.data!;
                             if (users.contains("false")) {
-                              
                               return Text(
-                                "no friends for you",
+                                "No Data",
                                 style: TextStyle(color: Colors.black),
                               );
                             } else {
@@ -266,9 +236,8 @@ class _TimelineState extends State<Timeline> {
                           if (snapshot.hasData) {
                             final users = snapshot.data!;
                             if (users.contains("false")) {
-
                               return Text(
-                                "no friends for you",
+                                "No Data",
                                 style: TextStyle(color: Colors.black),
                               );
                             } else {
@@ -289,60 +258,58 @@ class _TimelineState extends State<Timeline> {
                         },
                       ),
                     ),
-
                   ],
                 ),
               ),
             ),
-        )),
+          )),
     );
   }
 
-  Stream<List<timeline>> readTimline(String type) =>
-      FirebaseFirestore.instance.collection("Maintenance").doc(FirebaseAuth.instance.currentUser!.uid).collection(type).snapshots().map(
-              (event) => event.docs.map((e) => timeline.fromJson(e.data())).toList());
+  Stream<List<timeline>> readTimline(String type) => FirebaseFirestore.instance
+      .collection("Maintenance")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection(type)
+      .snapshots()
+      .map((event) =>
+          event.docs.map((e) => timeline.fromJson(e.data())).toList());
 
-
-
-  Widget buildTimeLine(timeline t) =>  Padding(
-    padding: const EdgeInsets.all(5.0),
-    child: Container(
-      height: 80,
-      width: 350,
-      decoration: BoxDecoration(
-          color: Mycolor.red),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Column(children: [
-            Text(
-              "${t.name}",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "${t.Date}",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                //   fontWeight: FontWeight.bold
+  Widget buildTimeLine(timeline t) => Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Container(
+            height: 80,
+            width: 350,
+            decoration: BoxDecoration(color: Mycolor.red),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(children: [
+                  Text(
+                    "${t.name}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "${t.Date}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      //   fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  Text(
+                    "${t.Content}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      //     fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ]),
               ),
-            ),
-            Text(
-              "${t.Content}",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                //     fontWeight: FontWeight.bold
-              ),
-            ),
-          ]),
-        ),
-      )
-    ),
-  );
-
+            )),
+      );
 }

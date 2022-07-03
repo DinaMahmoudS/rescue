@@ -1,13 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue2/MapScreen.dart';
 import 'package:rescue2/home_chat.dart';
-import 'package:rescue2/screens/location.dart';
 import 'package:rescue2/screens/safety.dart';
 import 'package:rescue2/screens/colors.dart';
 import 'package:rescue2/screens/home2.dart';
 import 'package:rescue2/screens/user_profile/profile_setting.dart';
-
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -21,8 +19,10 @@ class _HomeState extends State<Home> {
   final screens = [
     const Home2(),
     const Safety(),
-    Mapscreens(),
-    MyHomePage(title: 'Chatbot-Helper',),
+    MapScreen(),
+    MyHomePage(
+      title: 'Chatbot-Helper',
+    ),
     const profile(),
   ];
 
@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
         AssetImage("assets/images/placeholder.png"),
         size: 30.0,
       ),
-       const ImageIcon(
+      const ImageIcon(
         AssetImage("assets/images/chat.png"),
         size: 30.0,
       ),

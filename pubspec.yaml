@@ -67,6 +67,9 @@ dependencies:
   firebase_storage: ^10.2.15
   file_picker: ^4.5.1
   geolocator:
+  native_notify: ^0.0.13
+  geocoding: ^2.0.4
+
 
 
 dev_dependencies:
@@ -95,6 +98,8 @@ flutter:
   assets:
     - assets/images/
     - assets/credentials.json
+    - assets/car_parts/
+    - assets/car_agency/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

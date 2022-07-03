@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue2/pojo/driverdetails.dart';
-import 'package:rescue2/pojo/winsh_data.dart';
 import 'package:rescue2/screens/winchpage/item.dart';
 
 import '../colors.dart';
@@ -23,10 +22,6 @@ class _ShopsState extends State<Shops> {
             borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(30),
                 bottomLeft: Radius.circular(30))),
-
-        // leading: const Icon(Icons.menu_open_rounded, color: Colors.red, ),
-
-        // actions: const [ Icon(Icons.chat_outlined )],
         title: const Text(
           "Shops",
           style: TextStyle(fontSize: 25),
@@ -43,15 +38,12 @@ class _ShopsState extends State<Shops> {
               if (snapshot.hasData) {
                 final users = snapshot.data!;
 
-
-
                 if (users.contains("false")) {
                   return Text(
                     "no friends for you",
                     style: TextStyle(color: Colors.black),
                   );
                 } else {
-                  // return Text("no friends you" , style: TextStyle(color: Colors.white),);
                   return ListView(
                     children: users.map(buildWinshs).toList(),
                   );
@@ -72,12 +64,21 @@ class _ShopsState extends State<Shops> {
     );
   }
 
-  Stream<List<DriverDetails>> readWinshs() =>
-      FirebaseFirestore.instance.collection("driver details").snapshots().map(
-          (event) => event.docs.map((e) => DriverDetails.fromJson(e.data())).toList());
+  Stream<List<DriverDetails>> readWinshs() => FirebaseFirestore.instance
+      .collection("driver details")
+      .snapshots()
+      .map((event) =>
+          event.docs.map((e) => DriverDetails.fromJson(e.data())).toList());
 
   Widget buildWinshs(DriverDetails winshs) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Item(context,  location: winshs.comuID, phone: winshs.phone, status: winshs.status, name: winshs.name, uuid: winshs.uId,),
+        child: Item(
+          context,
+          location: winshs.comuID,
+          phone: winshs.phone,
+          status: winshs.status,
+          name: winshs.name,
+          uuid: winshs.uId,
+        ),
       );
 }

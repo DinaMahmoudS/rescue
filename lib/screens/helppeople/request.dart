@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rescue2/screens/helppeople/map_widget.dart';
 import 'package:rescue2/screens/helppeople/panel_widget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 
 class Request extends StatefulWidget {
   const Request({Key? key}) : super(key: key);
@@ -23,25 +21,16 @@ class _RequestState extends State<Request> {
     zoom: 14.4746,
   );
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
-          body: SlidingUpPanel(
-           body: MapWidget(),
-      panelBuilder: (controller) => PanelWidget(
-        controller: controller,
-
-        
+      body: SlidingUpPanel(
+        body: MapWidget(),
+        panelBuilder: (controller) => PanelWidget(
+          controller: controller,
+        ),
       ),
-          ),
     );
   }
-
-  }
+}
