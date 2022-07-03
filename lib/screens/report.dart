@@ -23,6 +23,7 @@ class _ReportState extends State<Report> {
 
   late var _locationCon = TextEditingController();
   late var causesCon = TextEditingController();
+  late var locationStr = TextEditingController();
   late String name;
 
   @override
@@ -114,6 +115,26 @@ class _ReportState extends State<Report> {
                           suffixIcon: Icon(Icons.send)
                       ),
                     ),
+
+                    SizedBox(height: 10),
+                    TextFormField(
+                      controller: locationStr,
+                      decoration: InputDecoration(
+                          labelText: "Steert",
+                          labelStyle: TextStyle(
+                              fontSize: 20,
+                              color: Mycolor.darkblue,
+                              fontWeight: FontWeight.bold),
+                          fillColor: Colors.black12,
+                          filled: true,
+                          border: OutlineInputBorder(
+
+                              borderRadius: BorderRadius.circular(10)),
+                          hintText:
+                          'Steert',
+                          suffixIcon: Icon(Icons.send)
+                      ),
+                    ),
                      ],
                 ),
                 const SizedBox(height: 5),
@@ -134,6 +155,7 @@ class _ReportState extends State<Report> {
                         FirebaseFirestore.instance.collection('traffic').add({
                           'location': _locationCon.text,
                           'causes': causesCon.text,
+                          'street': locationStr.text,
                           'uuid': '${name}',
                         }).whenComplete(() =>
                         {
@@ -232,6 +254,22 @@ class _ReportState extends State<Report> {
             ),
 
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              ' ${userData.street}',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 18,
+                //fontWeight: FontWeight.w700,
+              ),
+            ),
+
+          ),
+
         ],),
       ),
     ),
