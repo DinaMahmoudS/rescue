@@ -63,7 +63,8 @@ class _ButtomSheatHelperState extends State<ButtomSheatHelper> {
                   ),
 
                 ),
-                 SizedBox(width: 150,),
+                 SizedBox(width: 100,),
+
                  IconButton(
                     onPressed: () {
                       _launchURL("tel:${widget.phone}");
