@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -203,7 +201,7 @@ class _HelppeopleState extends State<Helppeople> {
                                           .update({
                                         "helpFrom":
                                             "${FirebaseAuth.instance.currentUser!.uid}",
-                                        "status":"accepted"
+                                        "status": "accepted"
                                       }).then((value) => {
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(

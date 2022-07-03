@@ -47,7 +47,7 @@ class _LoginState extends State<Login> {
                 body: Container(
                   alignment: Alignment.center,
                   color: Mycolor.white,
-                  child:  SingleChildScrollView(
+                  child: SingleChildScrollView(
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
@@ -136,7 +136,8 @@ class _LoginState extends State<Login> {
                                             color: Mycolor.teal,
                                           ),
                                           border: InputBorder.none),
-                                      keyboardType: TextInputType.visiblePassword,
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
                                     ),
                                   ),
                                   Row(
@@ -150,7 +151,8 @@ class _LoginState extends State<Login> {
                                               return Forgot();
                                             }));
                                           },
-                                          child: const Text("Forgot Password?")),
+                                          child:
+                                              const Text("Forgot Password?")),
                                     ],
                                   ),
                                 ],
@@ -173,11 +175,6 @@ class _LoginState extends State<Login> {
                                         email: emailController.text,
                                         password: passwordController.text);
                                   }
-
-                                  /* Navigator.push(context, MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                    return const Home();
-                                  })); */
                                 },
                                 child: const Text(
                                   'LOGIN',

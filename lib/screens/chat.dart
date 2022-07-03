@@ -8,7 +8,7 @@ import 'package:dialogflow_grpc/dialogflow_grpc.dart';
 import 'package:dialogflow_grpc/generated/google/cloud/dialogflow/v2beta1/session.pb.dart';
 
 // TODO import Dialogflow
-//DialogflowGrpcV2Beta1 dialogflow;
+
 late DialogflowGrpcV2Beta1 dialogflow;
 
 class Chat extends StatefulWidget {
@@ -118,7 +118,6 @@ class _ChatState extends State<Chat> {
       'HIPAA'
     ], boost: 20.0);
 
-    // See: https://cloud.google.com/dialogflow/es/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.InputAudioConfig
     var config = InputConfigV2beta1(
         encoding: 'AUDIO_ENCODING_LINEAR_16',
         languageCode: 'en-US',
@@ -163,8 +162,7 @@ class _ChatState extends State<Chat> {
   }
 
   // The chat interface
-  //
-  //------------------------------------------------------------------------------------
+
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
@@ -217,10 +215,8 @@ class _ChatState extends State<Chat> {
   }
 }
 
-//------------------------------------------------------------------------------------
 // The chat message balloon
-//
-//------------------------------------------------------------------------------------
+
 class ChatMessage extends StatelessWidget {
   ChatMessage({required this.text, required this.name, required this.type});
 

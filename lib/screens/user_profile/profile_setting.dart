@@ -130,7 +130,8 @@ class _profileState extends State<profile> {
                                 color: Mycolor.teal,
                               ),
                               Text("  ${emgNumber}",
-                                  style: TextStyle(color: Colors.black,fontSize: 17))
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17))
                             ],
                           ),
                         ),
@@ -150,7 +151,8 @@ class _profileState extends State<profile> {
                                 Icons.directions_car_rounded,
                               ),
                               Text("  ${carModel}",
-                                  style: TextStyle(color: Colors.black,fontSize: 17))
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17))
                             ],
                           ),
                         ),
@@ -171,7 +173,8 @@ class _profileState extends State<profile> {
                                 color: Mycolor.teal,
                               ),
                               Text("  ${carColor}",
-                                  style: TextStyle(color: Colors.black,fontSize: 17))
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17))
                             ],
                           ),
                         ),
@@ -192,7 +195,8 @@ class _profileState extends State<profile> {
                                 color: Mycolor.teal,
                               ),
                               Text("  ${license}",
-                                  style: TextStyle(color: Colors.black,fontSize: 17))
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17))
                             ],
                           ),
                         ),

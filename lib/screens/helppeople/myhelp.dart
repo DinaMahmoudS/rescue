@@ -118,13 +118,17 @@ class _HelpFrompeopleState extends State<HelpFrompeople> {
           ),
           child: InkWell(
             onTap: () {
-              FirebaseFirestore.instance.collection("users").doc(userData.helpFrom)
-                  .get().then((value) => {
-
-
-                _showMyDialog(context,  "${value.get("number")}", "${value.get("name")} "," ${value.get("car_model")} "),
-
-              });
+              FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(userData.helpFrom)
+                  .get()
+                  .then((value) => {
+                        _showMyDialog(
+                            context,
+                            "${value.get("number")}",
+                            "${value.get("name")} ",
+                            " ${value.get("car_model")} "),
+                      });
             },
             child: Column(
               children: [
@@ -164,7 +168,6 @@ class _HelpFrompeopleState extends State<HelpFrompeople> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
@@ -189,81 +192,75 @@ class _HelpFrompeopleState extends State<HelpFrompeople> {
                 ),
               )),
           content: SingleChildScrollView(
-            child: /*Column(
-              //crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  name,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700),
-                ),
-                Text(
-                  phone,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700),
-                ),
-              ],
-            ),*/
-            Column(
-              children: [
-
-                Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        "   name : ${name}  ",
-                        style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold,),
-
-                      ),
-
-                    ),
-                    ],
-                ),
-                SizedBox(height: 15,),
-                Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        "   phone : ${phone}  ",
-                        style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold),
+              child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    child: Text(
+                      "   name : ${name}  ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 15,),
-                Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        "   car model : ${carModel}",
-                        style: TextStyle(color: Colors.black,fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Container(
+                    child: Text(
+                      "   phone : ${phone}  ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
-                  ],
-                ),
-              ],
-            )
-          ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Container(
+                    child: Text(
+                      "   car model : ${carModel}",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )),
           actions: <Widget>[
             IconButton(
                 onPressed: () {
                   _launchURL("tel:${phone}");
                 },
-                icon: Icon(Icons.phone,color: Mycolor.red,size: 30,)),
+                icon: Icon(
+                  Icons.phone,
+                  color: Mycolor.red,
+                  size: 30,
+                )),
             SizedBox(
               width: 5,
             ),
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => ChatScreen()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => ChatScreen()));
                 },
-                icon: Icon(Icons.chat,color: Mycolor.red,size: 30)),
-
+                icon: Icon(Icons.chat, color: Mycolor.red, size: 30)),
           ],
         );
       },
